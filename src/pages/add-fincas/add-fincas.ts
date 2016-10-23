@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController, Events } from 'ionic-angular';
+import {Finca} from '../../providers/fincas/finca';
+import {FincaClient} from '../../providers/fincas/finca-client';
 
 /*
   Generated class for the AddFincas page.
@@ -12,11 +14,37 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'add-fincas.html'
 })
 export class AddFincasPage {
-
-  constructor(public navCtrl: NavController) {}
+  finca:Finca;
+  constructor(public navCtrl: NavController,
+              private fincas:FincaClient,
+              private toast:ToastController,
+              private events:Events) {
+                this.finca = new Finca();
+              }
 
   ionViewDidLoad() {
     console.log('Hello AddFincas Page');
+  }
+
+  save(){
+    this.fincas.insert(this.finca).subscribe(
+      (res)=>{
+        this.processResponse(res);
+        this.events.publish("reloadHome");
+        this.navCtrl.pop();
+      }
+      , (err)=>this.processResponse(false));
+  }
+
+  processResponse(success:boolean){
+    let msg;
+    if(success){
+      msg = this.toast.create({message:"Exito !", duration:3000});
+      
+    }else{
+      msg = this.toast.create({message:"Error !", duration:3000});
+    }
+    msg.present();
   }
 
 }

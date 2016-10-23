@@ -7,12 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>AddFincas</ion-title>
+    <ion-title>Agregar Fincas</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-item>
+    <ion-label floating>Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="finca.nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Dirección</ion-label>
+    <ion-input type="text" [(ngModel)]="finca.direccion"></ion-input>
+  </ion-item>
+
+  <button ion-button (click)="save()">Agregar</button>
 
 </ion-content>
