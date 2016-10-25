@@ -24,7 +24,7 @@ export class AddFincasPage {
     this.finca = new Finca();
     store.get("id").then((value: number) => {
       this.finca.idusr = value;
-      console.log("id es" + this.finca.idusr)      
+      console.log("id es" + this.finca.idusr)
     });
   }
 

@@ -5,6 +5,8 @@ import { NavController, Events, NavParams } from 'ionic-angular';
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
 
+import {InfoPage} from '../info-page/info-page';
+
 //import { HomePage } from '../home/home';
 
 /*
@@ -47,6 +49,10 @@ export class FincaDetailsPage {
   loadDetails(id:String) {
     console.log("entro");
     this.client.getOne(id).subscribe((res) => { this.data = res });
+  }
+
+  goToInfo(){
+    this.navCtrl.push(InfoPage);
   }
 
 }

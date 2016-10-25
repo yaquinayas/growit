@@ -8,6 +8,7 @@ import {LoginPage} from '../pages/login/login';
 import {RegisterPage} from '../pages/register/register';
 import {AddFincasPage} from '../pages/add-fincas/add-fincas';
 import {FincaDetailsPage} from '../pages/finca-details/finca-details';
+import {InfoPage} from '../pages/info-page/info-page';
 import {TabsPage} from '../pages/tabs-page/tabs-page';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -27,7 +28,8 @@ import {Storage} from '@ionic/Storage';
     FincaDetailsPage,
     TabsPage,
     AboutPage,
-    ContactPage
+    ContactPage,
+    InfoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -43,7 +45,8 @@ import {Storage} from '@ionic/Storage';
     FincaDetailsPage,
     TabsPage,
     AboutPage,
-    ContactPage
+    ContactPage,
+    InfoPage
   ],
   providers: [
     Storage,
