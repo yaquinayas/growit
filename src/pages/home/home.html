@@ -7,30 +7,26 @@
 </ion-header>
 
 <ion-content padding>
-	<ion-list>
-		<ion-item *ngFor="let u of data">
+
+	<ion-card *ngFor="let u of data" (click)="goToFincaDetails(id = u.idfinca )">
+		<ion-card-content>
 			<ion-grid>
 				<ion-row>
-					<ion-col>
+					<ion-col width-50>
 						<img src="../assets/img/fincas2.jpg">
 					</ion-col>
-					<ion-col>
-						
-						<h3><b>Finca: </b> {{u.nombre}}</h3>
+					<ion-col width-50>
+						<h3><b>Finca: </b> {{u.nombre}}.</h3>
 						<h3> {{u.direccion}}</h3>
 					</ion-col>
-					<ion-col>
-						<br>
-						<ion-icon name="eye" (click)="goToFincaDetails(id = u.idfinca )"></ion-icon>
-					</ion-col>
+
 				</ion-row>
 			</ion-grid>
+		</ion-card-content>
+	</ion-card>
 
-
-		</ion-item>
-	</ion-list>
 	<button (click)="CloseSession()" color="secundary">salir</button>
 	<ion-fab bottom center>
-		<button ion-fab (click)="goToAddFincas()" color="secundary"><ion-icon name="add"></ion-icon></button>		
-	</ion-fab>	
+		<button ion-fab (click)="goToAddFincas()" color="secundary"><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
 </ion-content>

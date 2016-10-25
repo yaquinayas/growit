@@ -23,14 +23,21 @@ export class HomePage {
     private params: NavParams) {
 
     this.data = [];
-    Storage.get("id").then((value: String) => {
+    let idparams = params.get('idf');
+    if(idparams){
+      this.loadFincas(idparams);
+      this.events.subscribe("reloadHome", () => {
+        this.loadFincas(idparams);
+      });
+    }else
+    {Storage.get("userid").then((value: String) => {
       let id = value;
       console.log("id es" + id);
       this.loadFincas(id);
       this.events.subscribe("reloadHome", () => {
         this.loadFincas(id);
       });
-    });
+    });}
     //let id = params.get('idf');
 
 
