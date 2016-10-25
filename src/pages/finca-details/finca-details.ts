@@ -5,7 +5,7 @@ import { NavController, Events, NavParams } from 'ionic-angular';
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
 
-import {InfoPage} from '../info-page/info-page';
+import { InfoPage } from '../info-page/info-page';
 
 //import { HomePage } from '../home/home';
 
@@ -22,7 +22,7 @@ import {InfoPage} from '../info-page/info-page';
 export class FincaDetailsPage {
   data: Finca[];
   id: String;
-  
+
   constructor(public navCtrl: NavController,
     private Storage: Storage,
     private client: FincaClient,
@@ -30,14 +30,11 @@ export class FincaDetailsPage {
     private navParams: NavParams) {
 
     this.data = [];
-    Storage.get("id").then((value: String)=>{
-       this.id = value;
-       console.log("id es"+this.id)
-        this.loadDetails(this.id);
-    });
-   
-    
-    
+    this.id = navParams.get('id');
+    this.loadDetails(this.id);
+
+
+
 
 
   }
@@ -46,13 +43,15 @@ export class FincaDetailsPage {
     console.log('Hello FincaDetails Page');
   }
 
-  loadDetails(id:String) {
+  loadDetails(id: String) {
     console.log("entro");
     this.client.getOne(id).subscribe((res) => { this.data = res });
   }
 
-  goToInfo(){
-    this.navCtrl.push(InfoPage);
+  goToInfo(id: String) {
+    this.navCtrl.push(InfoPage, {
+      idf: id
+    });
   }
 
 }

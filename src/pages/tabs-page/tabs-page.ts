@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import {FincaDetailsPage} from '../finca-details/finca-details';
 import { AboutPage } from '../about/about';
@@ -20,8 +20,14 @@ export class TabsPage {
   tab1Root: any = FincaDetailsPage;
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
+  idf: String;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,
+  private params: NavParams) {
+    this.idf = params.get('idf');
+    console.log("tabs "+this.idf);
+    
+  }
 
   
 }

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/Storage';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { FincaClient } from '../../providers/fincas/finca-client';
+import { Finca } from '../../providers/fincas/finca';
 
 /*
   Generated class for the InfoPage page.
@@ -12,11 +16,23 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'info-page.html'
 })
 export class InfoPage {
-
-  constructor(public navCtrl: NavController) {}
+  data: Finca[];
+  id: String;
+  constructor(public navCtrl: NavController,
+    private client: FincaClient,
+    private store: Storage,
+    private params: NavParams) {
+    this.data = [];
+    this.id = params.get('idf');
+    this.loadDetails(this.id);
+  }
 
   ionViewDidLoad() {
     console.log('Hello InfoPage Page');
+  }
+
+  loadDetails(id:String) {    
+    this.client.getOne(id).subscribe((res) => { this.data = res });
   }
 
 }
