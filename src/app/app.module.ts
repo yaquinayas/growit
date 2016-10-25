@@ -7,8 +7,13 @@ import { HomePage } from '../pages/home/home';
 import {LoginPage} from '../pages/login/login';
 import {RegisterPage} from '../pages/register/register';
 import {AddFincasPage} from '../pages/add-fincas/add-fincas';
+import {FincaDetailsPage} from '../pages/finca-details/finca-details';
+import {TabsPage} from '../pages/tabs-page/tabs-page';
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
 
 import {FincaClient} from '../providers/fincas/finca-client';
+import {UserClient} from '../providers/usuarios/user-client';
 
 import {Storage} from '@ionic/Storage';
 
@@ -18,7 +23,11 @@ import {Storage} from '@ionic/Storage';
     HomePage,
     LoginPage,
     RegisterPage,
-    AddFincasPage
+    AddFincasPage,
+    FincaDetailsPage,
+    TabsPage,
+    AboutPage,
+    ContactPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -30,11 +39,16 @@ import {Storage} from '@ionic/Storage';
     HomePage,
     LoginPage,
     RegisterPage,
-    AddFincasPage
+    AddFincasPage,
+    FincaDetailsPage,
+    TabsPage,
+    AboutPage,
+    ContactPage
   ],
   providers: [
     Storage,
-    FincaClient
+    FincaClient,
+    UserClient
   ]
 })
 export class AppModule {}

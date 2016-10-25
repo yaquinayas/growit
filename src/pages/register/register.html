@@ -15,4 +15,24 @@
 
 <ion-content padding>
 
+   <ion-item>
+    <ion-label floating>Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario.nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Cedula</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario.cedula"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Usuario</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario.usr"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="usuario.pass"></ion-input>
+  </ion-item>
+
+  <button ion-button (click)="save()">Agregar</button>
+
 </ion-content>

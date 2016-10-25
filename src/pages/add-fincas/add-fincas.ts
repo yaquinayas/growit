@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/Storage';
 import { NavController, ToastController, Events } from 'ionic-angular';
-import {Finca} from '../../providers/fincas/finca';
-import {FincaClient} from '../../providers/fincas/finca-client';
+import { Finca } from '../../providers/fincas/finca';
+import { FincaClient } from '../../providers/fincas/finca-client';
 
 /*
   Generated class for the AddFincas page.
@@ -14,35 +15,40 @@ import {FincaClient} from '../../providers/fincas/finca-client';
   templateUrl: 'add-fincas.html'
 })
 export class AddFincasPage {
-  finca:Finca;
+  finca: Finca;
   constructor(public navCtrl: NavController,
-              private fincas:FincaClient,
-              private toast:ToastController,
-              private events:Events) {
-                this.finca = new Finca();
-              }
+    private fincas: FincaClient,
+    private toast: ToastController,
+    private events: Events,
+    private store: Storage) {
+    this.finca = new Finca();
+    store.get("id").then((value: number) => {
+      this.finca.idusr = value;
+      console.log("id es" + this.finca.idusr)      
+    });
+  }
 
   ionViewDidLoad() {
     console.log('Hello AddFincas Page');
   }
 
-  save(){
+  save() {
     this.fincas.insert(this.finca).subscribe(
-      (res)=>{
+      (res) => {
         this.processResponse(res);
         this.events.publish("reloadHome");
         this.navCtrl.pop();
       }
-      , (err)=>this.processResponse(false));
+      , (err) => this.processResponse(false));
   }
 
-  processResponse(success:boolean){
+  processResponse(success: boolean) {
     let msg;
-    if(success){
-      msg = this.toast.create({message:"Exito !", duration:3000});
-      
-    }else{
-      msg = this.toast.create({message:"Error !", duration:3000});
+    if (success) {
+      msg = this.toast.create({ message: "Exito !", duration: 3000 });
+
+    } else {
+      msg = this.toast.create({ message: "Error !", duration: 3000 });
     }
     msg.present();
   }

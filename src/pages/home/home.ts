@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {Storage} from '@ionic/Storage';
-import { NavController, Events } from 'ionic-angular';
+import { NavController, Events, NavParams } from 'ionic-angular';
 
 import {FincaClient} from '../../providers/fincas/finca-client';
 import {Finca} from '../../providers/fincas/finca';
 
 import {LoginPage} from '../login/login';
 import {AddFincasPage} from '../add-fincas/add-fincas';
+import {FincaDetailsPage} from '../finca-details/finca-details';
+import {TabsPage} from '../tabs-page/tabs-page';
 
 @Component({
   selector: 'page-home',
@@ -14,23 +16,29 @@ import {AddFincasPage} from '../add-fincas/add-fincas';
 })
 export class HomePage {
    data:Finca[];
-  constructor(public navCtrl: NavController, 
+   constructor(public navCtrl: NavController, 
               private Storage: Storage,
               private client: FincaClient,
-              private events: Events) {
+              private events: Events,
+              private params: NavParams) {
 
                 this.data = [];
-                this.loadFarms();
+                let id = params.get('idf');
+                this.loadFincas(id);
                 this.events.subscribe("reloadHome",()=>{
-                  this.loadFarms();
+                this.loadFincas(id);
                 });
 
     
   }
 
-  loadFarms(){
+  ionViewDidLoad() {
+    console.log('Hello Fincas Page');
+  }
+
+  loadFincas(id:String){
     console.log("entro");
-    this.client.getAll().subscribe((res)=>{this.data = res});
+    this.client.getAllOfUsr(id).subscribe((res)=>{this.data = res});
   }
 
   CloseSession(){
@@ -40,6 +48,15 @@ export class HomePage {
   }
   goToAddFincas(){
     this.navCtrl.push(AddFincasPage);
+  }
+
+  goToFincaDetails(id:String){
+    this.Storage.set("idfinca", id);
+    console.log("id almacenado "+ id);
+    this.navCtrl.push(TabsPage, {
+        idf: id
+    }      
+        );
   }
 
 }

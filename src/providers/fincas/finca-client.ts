@@ -18,6 +18,15 @@ export class FincaClient {
     getAll(): Observable<Finca[]> {
         return this.http.get(this.url).map(this.processArray).catch(this.processCatch);
     }
+
+    getAllOfUsr(id: String): Observable<Finca[]>{
+        return this.http.get(this.url+"/usr/"+id).map(this.processArray).catch(this.processCatch);
+    }
+
+    getOne(id: String): Observable<Finca[]> {
+        
+        return this.http.get(this.url+"/"+id).map(this.processArray).catch(this.processCatch);
+    }
     insert(finca:Finca){
     return this.http.post(this.url, finca).map(this.process).catch(this.processCatch);
 
