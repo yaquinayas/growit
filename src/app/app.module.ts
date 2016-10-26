@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
-
+//pages
 import { HomePage } from '../pages/home/home';
 import {LoginPage} from '../pages/login/login';
 import {RegisterPage} from '../pages/register/register';
@@ -10,11 +10,14 @@ import {AddFincasPage} from '../pages/add-fincas/add-fincas';
 import {FincaDetailsPage} from '../pages/finca-details/finca-details';
 import {InfoPage} from '../pages/info-page/info-page';
 import {TabsPage} from '../pages/tabs-page/tabs-page';
-import { AboutPage } from '../pages/about/about';
+import { AnimalsPage } from '../pages/animales/animales';
 import { ContactPage } from '../pages/contact/contact';
-
+import {AnimalDetailsPage} from '../pages/animal-details/animal-details';
+import {AddAnimalPage} from '../pages/add-animal/add-animal';
+//providers
 import {FincaClient} from '../providers/fincas/finca-client';
 import {UserClient} from '../providers/usuarios/user-client';
+import {AnimalClient} from '../providers/animales/animal-client';
 
 import {Storage} from '@ionic/Storage';
 
@@ -27,9 +30,11 @@ import {Storage} from '@ionic/Storage';
     AddFincasPage,
     FincaDetailsPage,
     TabsPage,
-    AboutPage,
+    AnimalsPage,
     ContactPage,
-    InfoPage
+    InfoPage,
+    AnimalDetailsPage,
+    AddAnimalPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -44,14 +49,17 @@ import {Storage} from '@ionic/Storage';
     AddFincasPage,
     FincaDetailsPage,
     TabsPage,
-    AboutPage,
+    AnimalsPage,
     ContactPage,
-    InfoPage
+    InfoPage,
+    AnimalDetailsPage,
+    AddAnimalPage
   ],
   providers: [
     Storage,
     FincaClient,
-    UserClient
+    UserClient,
+    AnimalClient
   ]
 })
 export class AppModule {}

@@ -65,7 +65,6 @@ export class HomePage {
   goToFincaDetails(id: String) {
     this.Storage.set("idfinca", id);
     console.log("id almacenado " + id);
-    this.events.publish("reloadDetails");
     this.navCtrl.push(TabsPage, {
       idf: id
     }

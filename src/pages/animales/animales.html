@@ -1,0 +1,37 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Animales
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	
+	<ion-card *ngFor="let u of data" (click)="goToAnimalDetails(id = u.id )">
+		<ion-card-content>
+			<ion-grid>
+				<ion-row>
+					<ion-col width-50>
+						<img src="../assets/img/vaca.jpg" >
+					</ion-col>
+					<ion-col width-50>
+						<h3><b>Nombre: </b> {{u.nombre}}</h3>
+						<h3><b>Raza:</b> {{u.raza}}</h3>
+						<h3><b>Sexo:</b>{{u.sexo}} </h3>
+					</ion-col>
+
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+	</ion-card>
+  <ion-fab bottom center>
+		<button ion-fab (click)="goToAdd()" color="secundary"><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
+  
+<!--<ion-thumbnail item-left>
+	<img src="img/thumbnail-puppy-1.jpg">
+</ion-thumbnail>-->
+
+
+</ion-content>

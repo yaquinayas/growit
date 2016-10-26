@@ -26,7 +26,7 @@ export class FincaDetailsPage {
   constructor(public navCtrl: NavController,
     private Storage: Storage,
     private client: FincaClient,
-    private events: Events,
+    private event: Events,
     private navParams: NavParams) {
 
     this.data = [];
@@ -52,6 +52,12 @@ export class FincaDetailsPage {
     this.navCtrl.push(InfoPage, {
       idf: id
     });
+  }
+
+  goToHome(){
+    /*this.navCtrl.pop();
+    this.navCtrl.setRoot(HomePage);*/
+    this.event.publish("goBack");
   }
 
 }

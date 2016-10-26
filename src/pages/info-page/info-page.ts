@@ -5,6 +5,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
 
+import { Animal } from '../../providers/animales/animal';
+import { AnimalClient } from '../../providers/animales/animal-client';
+
 /*
   Generated class for the InfoPage page.
 
@@ -17,22 +20,35 @@ import { Finca } from '../../providers/fincas/finca';
 })
 export class InfoPage {
   data: Finca[];
+  animal: Animal[];
+  cantidad: number;
   id: String;
   constructor(public navCtrl: NavController,
     private client: FincaClient,
+    private animales: AnimalClient,
     private store: Storage,
     private params: NavParams) {
     this.data = [];
+    this.animal = [];
     this.id = params.get('idf');
     this.loadDetails(this.id);
+    this.NumberOfAnimals(this.id);
   }
 
   ionViewDidLoad() {
     console.log('Hello InfoPage Page');
   }
 
-  loadDetails(id:String) {    
+  loadDetails(id: String) {
     this.client.getOne(id).subscribe((res) => { this.data = res });
+  }
+
+  NumberOfAnimals(id: String) {
+    this.animales.getAllOfFinca(id).subscribe((res) => { 
+      this.animal = res;
+      this.cantidad = res.length;
+      console.log(this.cantidad);
+       });
   }
 
 }

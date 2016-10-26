@@ -1,32 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from "rxjs/observable";
-import { Finca } from './finca';
+import { Animal } from './animal';
 
 /*
-  Generated class for the FincaClient provider.
+  Generated class for the Animales provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
-
 @Injectable()
-export class FincaClient {
-    url: string = "http://localhost:8080/fincas";
+export class AnimalClient {
+    url: string = "http://localhost:8080/animales";
     constructor(public http: Http) { }
 
 
-    getAllOfUsr(id: String): Observable<Finca[]> {
-        return this.http.get(this.url + "/usr/" + id).map(this.processArray).catch(this.processCatch);
+    insert(Animal: Animal) {
+        return this.http.post(this.url, Animal).map(this.process).catch(this.processCatch);
+
     }
 
-    getOne(id: String): Observable<Finca[]> {
+    getAllOfFinca(id: String): Observable<Animal[]> {
+        return this.http.get(this.url + "/idfinca/" + id).map(this.processArray).catch(this.processCatch);
+    }
+
+    getOne(id: String): Observable<Animal[]> {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
-    insert(finca: Finca) {
-        return this.http.post(this.url, finca).map(this.process).catch(this.processCatch);
 
-    }
     private process(res: Response) {
         let body = res.json();
         return body.success;

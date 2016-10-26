@@ -1,0 +1,79 @@
+<!--
+  Generated template for the AddAnimal page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>Añadir un animal</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-item>
+		<ion-label floating>Nombre</ion-label>
+		<ion-input type="text" [(ngModel)]="animal.nombre"></ion-input>
+	</ion-item>
+
+	<ion-item>
+		<ion-label floating>Raza</ion-label>
+		<ion-input type="text" [(ngModel)]="animal.raza"></ion-input>
+	</ion-item>
+
+	<br>
+	<ion-list radio-group>
+		<ion-list-header>
+			Sexo
+		</ion-list-header>
+
+		<ion-item>
+			<ion-label>Macho</ion-label>
+			<ion-radio (click)="SetSexo(s='Macho')" name="sexo" value="Macho"></ion-radio>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Hembra</ion-label>
+			<ion-radio (click)="SetSexo(s='Hembra')" name="sexo" value="Hembra"></ion-radio>
+		</ion-item>
+	</ion-list>
+
+	<br>
+	<ion-list radio-group>
+		<ion-list-header>
+			Tipo
+		</ion-list-header>
+
+		<ion-item>
+			<ion-label>Carne</ion-label>
+			<ion-radio (click)="SetTipo(t='Carne')" value="Carne"></ion-radio>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Leche</ion-label>
+			<ion-radio (click)="SetTipo(t='Leche')" value="Leche"></ion-radio>
+		</ion-item>
+	</ion-list>
+
+
+
+	<ion-item *ngIf="animal.sexo == 'Hembra'">
+		<ion-label floating>Litros diarios</ion-label>
+		<ion-input type="number" [(ngModel)]="animal.litros_diarios"></ion-input>
+	</ion-item>
+
+
+	<ion-item>
+		<ion-label floating>Peso</ion-label>
+		<ion-input type="number" [(ngModel)]="animal.peso"></ion-input>
+	</ion-item>
+
+	<button ion-button (click)="save()">Agregar</button>
+
+
+
+
+</ion-content>

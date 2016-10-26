@@ -48,7 +48,7 @@ export class LoginPage {
           this.loc.set("logged", true);
         } else {
           this.loc.set("logged", false);
-          this.processResponse(res);
+          this.processResponse(false);
         }
 
       }
