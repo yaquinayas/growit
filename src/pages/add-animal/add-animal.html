@@ -40,6 +40,10 @@
 			<ion-radio (click)="SetSexo(s='Hembra')" name="sexo" value="Hembra"></ion-radio>
 		</ion-item>
 	</ion-list>
+	<ion-item>
+		<ion-label>Fecha de nacimientp</ion-label>
+		<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
+	</ion-item>
 
 	<br>
 	<ion-list radio-group>

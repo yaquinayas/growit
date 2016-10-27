@@ -18,6 +18,7 @@ import { AnimalClient } from '../../providers/animales/animal-client';
 })
 export class AnimalDetailsPage {
   data: Animal[];
+  nac: String;
 
   constructor(public navCtrl: NavController,
     private params: NavParams,
@@ -25,6 +26,8 @@ export class AnimalDetailsPage {
     this.data = [];
     let ida = params.get('ida');
     this.loadDetails(ida);
+
+
   }
 
   ionViewDidLoad() {
@@ -32,9 +35,22 @@ export class AnimalDetailsPage {
   }
 
   loadDetails(id: String) {
-    this.client.getOne(id).subscribe((res) => { this.data = res });
+    this.client.getOne(id).subscribe((res) => {
+
+      this.data = res;
+      let all = JSON.stringify(this.data);
+      let nac = all.split(',');
+      let nac2 = nac[4].split(':"');
+      let nac3 = nac2[1].split('T');
+      this.nac = nac3[0];     
+
+      console.log("nac es " + nac3[0]);
+
+
+      console.log(JSON.stringify(this.data));
+    });
   }
 
-  
+
 
 }

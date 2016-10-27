@@ -24,22 +24,25 @@ export class HomePage {
 
     this.data = [];
     let idparams = params.get('idf');
-    if(idparams){
+    if (idparams) {
       this.loadFincas(idparams);
       this.events.subscribe("reloadHome", () => {
         this.loadFincas(idparams);
       });
-    }else
-    {Storage.get("userid").then((value: String) => {
-      let id = value;
-      console.log("id es" + id);
-      this.loadFincas(id);
-      this.events.subscribe("reloadHome", () => {
+    } else {
+      Storage.get("userid").then((value: String) => {
+        let id = value;
+        console.log("id es" + id);
         this.loadFincas(id);
+        this.events.subscribe("reloadHome", () => {
+          this.loadFincas(id);
+        });
       });
-    });}
+    }
+    console.log("date " + Date.now());
     //let id = params.get('idf');
-
+    // let holi = new Date(Date.now()).toLocaleString();
+    // console.log(holi);
 
 
   }

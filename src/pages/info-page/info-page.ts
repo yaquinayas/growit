@@ -22,6 +22,8 @@ export class InfoPage {
   data: Finca[];
   animal: Animal[];
   cantidad: number;
+  machos: number;
+  hembras: number;
   id: String;
   constructor(public navCtrl: NavController,
     private client: FincaClient,
@@ -30,9 +32,23 @@ export class InfoPage {
     private params: NavParams) {
     this.data = [];
     this.animal = [];
+
     this.id = params.get('idf');
     this.loadDetails(this.id);
     this.NumberOfAnimals(this.id);
+    this.Genders(this.id, 'Macho');
+    this.Genders(this.id, 'Hembra');
+    if (this.machos == null){
+      this.machos = 0;
+    }
+    if (this.hembras == null){
+      this.hembras = 0;
+    }
+    if (this.cantidad == null){
+      this.cantidad = 0;
+    }
+    
+
   }
 
   ionViewDidLoad() {
@@ -44,11 +60,22 @@ export class InfoPage {
   }
 
   NumberOfAnimals(id: String) {
-    this.animales.getAllOfFinca(id).subscribe((res) => { 
+    this.animales.getAllOfFinca(id).subscribe((res) => {
       this.animal = res;
       this.cantidad = res.length;
       console.log(this.cantidad);
-       });
+    });
+  }
+
+  Genders(id: String, sexo: String) {
+    this.animales.getAllOfFincaGender(id, sexo).subscribe((res) => {
+      if (sexo == 'Macho') {
+        this.machos = res.length;
+      } else {
+        this.hembras = res.length;
+      }
+    });
+
   }
 
 }

@@ -2,7 +2,8 @@ export class Animal {
   id: number;
   nombre: String;
   raza: String;
-  sexo: String;
+  nacimiento: Date;
+  sexo: String;  
   tipo: String;
   peso: number;
   litros_diarios: String;

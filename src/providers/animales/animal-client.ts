@@ -24,6 +24,10 @@ export class AnimalClient {
         return this.http.get(this.url + "/idfinca/" + id).map(this.processArray).catch(this.processCatch);
     }
 
+    getAllOfFincaGender(id: String,sexo: String): Observable<Animal[]> {
+        return this.http.get(this.url + "/idfinca/" + id + "/sexo/" + sexo).map(this.processArray).catch(this.processCatch);
+    }
+
     getOne(id: String): Observable<Animal[]> {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
