@@ -6,6 +6,7 @@ import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
 
 import { InfoPage } from '../info-page/info-page';
+import { ReportDetailPage } from '../report-detail/report-detail';
 
 //import { HomePage } from '../home/home';
 
@@ -54,7 +55,13 @@ export class FincaDetailsPage {
     });
   }
 
-  goToHome(){
+  goToReportDetail(id: String) {
+    this.navCtrl.push(ReportDetailPage, {
+      idf: id
+    });
+  }
+
+  goToHome() {
     /*this.navCtrl.pop();
     this.navCtrl.setRoot(HomePage);*/
     this.event.publish("goBack");
