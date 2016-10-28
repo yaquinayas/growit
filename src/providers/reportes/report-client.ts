@@ -11,7 +11,7 @@ import { Reporte } from './reporte';
 */
 @Injectable()
 export class ReportClient {
-  url: string = "http://localhost:8080/reportes"
+  url: string = "http://192.168.0.12:8080/reportes"
   constructor(public http: Http) {
     console.log('Hello ReportClient Provider');
   }

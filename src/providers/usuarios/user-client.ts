@@ -12,7 +12,7 @@ import { User } from './user';
 
 @Injectable()
 export class UserClient {
-    url: string = "http://localhost:8080/usuarios";
+    url: string = "http://192.168.0.12:8080/usuarios";
     constructor(public http: Http) {}
 
     login(User:User) {

@@ -3,6 +3,7 @@ import { Storage } from '@ionic/Storage';
 import { NavController, ToastController, Events } from 'ionic-angular';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
+import { Camera } from 'ionic-native';
 
 /*
   Generated class for the AddAnimal page.
@@ -20,7 +21,7 @@ export class AddAnimalPage {
     private client: AnimalClient,
     private toast: ToastController,
     private events: Events,
-    private store: Storage
+    private store: Storage    
   ) {
     this.animal = new Animal;
     store.get("idfinca").then((value: number)=>{
@@ -68,6 +69,16 @@ export class AddAnimalPage {
       msg = this.toast.create({ message: "Error !", duration: 3000 });
     }
     msg.present();
+  }
+
+  camara(){
+    Camera.getPicture({quality: 100}).then((imageData) => {
+ // imageData is either a base64 encoded string or a file URI
+ // If it's base64:
+ let base64Image = 'data:image/jpeg;base64,' + imageData;
+}, (err) => {
+ // Handle error
+});
   }
 
 }
