@@ -75,11 +75,14 @@
 		<ion-input type="number" [(ngModel)]="animal.peso"></ion-input>
 	</ion-item>
 
-	
+	<div *ngIf="animal.imagen == '' ">
+		<img src="../assets/img/add-image.png"  (click)="imagen()">
+	</div>
 
-	
+	<div *ngIf="animal.image != ''">
+		<img src="{{animal.imagen}}">
+	</div>
 
-<button ion-button (click)="camara()">foto</button>
 	<button ion-button (click)="save()">Agregar</button>
 
 

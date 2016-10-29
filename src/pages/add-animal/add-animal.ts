@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, ToastController, Events } from 'ionic-angular';
+import { NavController, ToastController, Events, AlertController } from 'ionic-angular';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
 import { Camera } from 'ionic-native';
@@ -21,9 +21,11 @@ export class AddAnimalPage {
     private client: AnimalClient,
     private toast: ToastController,
     private events: Events,
-    private store: Storage    
+    private store: Storage,
+    private alertCtrl: AlertController    
   ) {
     this.animal = new Animal;
+    this.animal.imagen = '';
     store.get("idfinca").then((value: number)=>{
       this.animal.id_finca = value;
       console.log("id finca es "+ this.animal.id_finca)
@@ -71,11 +73,50 @@ export class AddAnimalPage {
     msg.present();
   }
 
+  imagen() {
+    let confirm = this.alertCtrl.create({
+      title: 'Insertar imagen',
+      message: 'Selecciona una imagen para subirla o tomala ahora ',
+      buttons: [
+        {
+          text: 'Tomar',
+          handler: () => {
+            this.camara();
+            console.log('Camara');
+          }
+        },
+        {
+          text: 'Seleccionar',
+          handler: () => {
+            this.galeria();
+            console.log('Galeria');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+
   camara(){
-    Camera.getPicture({quality: 100}).then((imageData) => {
+    Camera.getPicture({quality: 100, destinationType: Camera.DestinationType.DATA_URL, saveToPhotoAlbum: true }).then((imageData) => {
  // imageData is either a base64 encoded string or a file URI
  // If it's base64:
  let base64Image = 'data:image/jpeg;base64,' + imageData;
+ this.animal.imagen = base64Image;
+ console.log(this.animal.imagen);
+}, (err) => {
+ // Handle error
+});
+  }
+
+  galeria(){
+    Camera.getPicture({destinationType: Camera.DestinationType.DATA_URL, sourceType: Camera.PictureSourceType.PHOTOLIBRARY }).then((imageData) => {
+ // imageData is either a base64 encoded string or a file URI
+ // If it's base64:
+ let base64Image = 'data:image/jpeg;base64,' + imageData;
+ this.animal.imagen = base64Image;
+ console.log(this.animal.imagen);
 }, (err) => {
  // Handle error
 });

@@ -8,6 +8,6 @@ export class Animal {
   peso: number;
   litros_diarios: String;
   id_finca: number; 
-  image: String; 
+  imagen: String; 
 
 }
