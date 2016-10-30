@@ -16,11 +16,11 @@ export class FincaClient {
     constructor(public http: Http) { }
 
 
-    getAllOfUsr(id: String): Observable<Finca[]> {
+    getAllOfUsr(id: string): Observable<Finca[]> {
         return this.http.get(this.url + "/usr/" + id).map(this.processArray).catch(this.processCatch);
     }
 
-    getOne(id: String): Observable<Finca[]> {
+    getOne(id: string): Observable<Finca[]> {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
     insert(finca: Finca) {

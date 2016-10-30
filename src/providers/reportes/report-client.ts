@@ -16,12 +16,12 @@ export class ReportClient {
     console.log('Hello ReportClient Provider');
   }
 
-  getAllOfUsr(id: String): Observable<Reporte[]> {
+  getAllOfUsr(id: string): Observable<Reporte[]> {
     return this.http.get(this.url + "/idfinca/" + id).map(this.processArray).catch(this.processCatch);
 
   }
 
-  getKinds(id: String, tipo: String){
+  getKinds(id: string, tipo: string){
     return this.http.get(this.url + "/idfinca/" + id + "/tipo/" + tipo).map(this.processArray).catch(this.processCatch);
   }
 

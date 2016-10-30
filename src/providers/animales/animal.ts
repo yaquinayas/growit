@@ -1,13 +1,13 @@
 export class Animal {
   id: number;
-  nombre: String;
-  raza: String;
+  imagen: string;
+  nombre: string;
+  raza: string;
   nacimiento: Date;
-  sexo: String;  
-  tipo: String;
+  sexo: string;
+  tipo: string;
   peso: number;
-  litros_diarios: String;
-  id_finca: number; 
-  imagen: String; 
+  litros_diarios: string;
+  id_finca: number;  
 
 }

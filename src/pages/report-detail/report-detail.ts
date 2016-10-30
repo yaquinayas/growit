@@ -17,7 +17,7 @@ import { Reporte } from '../../providers/reportes/reporte';
 })
 export class ReportDetailPage {
   data: Reporte[];
-  id: String;
+  id: string;
   ingresos: Reporte[];
   totingresos: number;
   egresos: Reporte[];
@@ -55,7 +55,7 @@ export class ReportDetailPage {
     console.log('Hello ReportDetail Page');
   }
 
-  getKinds(id: String, tipo: String) {
+  getKinds(id: string, tipo: string) {
     this.client.getKinds(id, tipo).subscribe((res) => {
       if (tipo == 'Ingreso') {
         this.ingresos = res;
@@ -74,7 +74,7 @@ export class ReportDetailPage {
   }
 
 
-  getAll(id: String) {
+  getAll(id: string) {
     this.client.getAllOfUsr(id).subscribe((res) => { this.data = res });
   }
 

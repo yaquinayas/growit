@@ -20,15 +20,15 @@ export class AnimalClient {
 
     }
 
-    getAllOfFinca(id: String): Observable<Animal[]> {
+    getAllOfFinca(id: string): Observable<Animal[]> {
         return this.http.get(this.url + "/idfinca/" + id).map(this.processArray).catch(this.processCatch);
     }
 
-    getAllOfFincaGender(id: String,sexo: String): Observable<Animal[]> {
+    getAllOfFincaGender(id: string,sexo: string): Observable<Animal[]> {
         return this.http.get(this.url + "/idfinca/" + id + "/sexo/" + sexo).map(this.processArray).catch(this.processCatch);
     }
 
-    getOne(id: String): Observable<Animal[]> {
+    getOne(id: string): Observable<Animal[]> {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
 

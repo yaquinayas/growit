@@ -3,8 +3,28 @@
 		<ion-title>
 			Fincas
 		</ion-title>
+		<button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
 	</ion-navbar>
 </ion-header>
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Herramientas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="goToProfile()">
+        Ver Perfil
+      </button>
+      <button ion-item (click)="CloseSession()">
+        Cerrar Sesión
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content></ion-nav>
 
 <ion-content padding>
 
@@ -13,7 +33,7 @@
 			<ion-grid>
 				<ion-row>
 					<ion-col width-50>
-						<img src="../assets/img/fincas2.jpg">
+						<img src="{{u.imagen}}">
 					</ion-col>
 					<ion-col width-50>
 						<h3><b>Finca: </b> {{u.nombre}}.</h3>

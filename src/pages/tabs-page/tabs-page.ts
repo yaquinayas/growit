@@ -25,7 +25,7 @@ export class TabsPage implements OnDestroy {
   tab2Root: any = AnimalsPage;
   tab3Root: any = ContactPage;
   tab4Root: any = AddReportsPage;
-  idf: String;
+  idf: string;
 
   constructor(public navCtrl: NavController,
     private params: NavParams, private event: Events) {

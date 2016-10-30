@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController  } from 'ionic-angular';
 
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
@@ -22,13 +22,14 @@ import { ReportDetailPage } from '../report-detail/report-detail';
 })
 export class FincaDetailsPage {
   data: Finca[];
-  id: String;
+  id: string;
 
   constructor(public navCtrl: NavController,
     private Storage: Storage,
     private client: FincaClient,
     private event: Events,
-    private navParams: NavParams) {
+    private navParams: NavParams,
+    private alertCtrl: AlertController) {
 
     this.data = [];
     this.id = navParams.get('id');
@@ -44,18 +45,36 @@ export class FincaDetailsPage {
     console.log('Hello FincaDetails Page');
   }
 
-  loadDetails(id: String) {
+  loadDetails(id: string) {
     console.log("entro");
-    this.client.getOne(id).subscribe((res) => { this.data = res });
+    this.client.getOne(id).subscribe((res) => { 
+      this.data = res 
+    },
+    (err) => {
+      let confirm = this.alertCtrl.create({
+          title: 'Error',
+          message: 'Hubo un problema al cargar los datos',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {                
+                console.log('OK');
+              }
+            }
+          ]
+        });
+        confirm.present();
+    }
+    );
   }
 
-  goToInfo(id: String) {
+  goToInfo(id: string) {
     this.navCtrl.push(InfoPage, {
       idf: id
     });
   }
 
-  goToReportDetail(id: String) {
+  goToReportDetail(id: string) {
     this.navCtrl.push(ReportDetailPage, {
       idf: id
     });

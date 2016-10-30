@@ -17,6 +17,7 @@ import { AddAnimalPage } from '../pages/add-animal/add-animal';
 import { AddReportsPage } from '../pages/add-reports/add-reports';
 import { FinanzasPage } from '../pages/finanzas/finanzas';
 import { ReportDetailPage } from '../pages/report-detail/report-detail';
+import { UserProfile } from '../pages/user-profile/user-profile';
 //providers
 import { FincaClient } from '../providers/fincas/finca-client';
 import { UserClient } from '../providers/usuarios/user-client';

@@ -61,7 +61,7 @@ export class AddReportsPage {
     msg.present();
   }
 
-  SetTipo(t: String) {
+  SetTipo(t: string) {
     console.log(t);
     delete this.reporte.tipo;
     this.reporte.tipo = t;

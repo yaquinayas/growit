@@ -1,7 +1,7 @@
 export class User{
     id: number;
-    nombre: String;
-    cedula: String;
-    usr: String;
-    pass: String;
+    nombre: string;
+    cedula: string;
+    usr: string;
+    pass: string;
 }

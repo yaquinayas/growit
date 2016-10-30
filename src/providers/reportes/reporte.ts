@@ -1,8 +1,8 @@
 export class Reporte {
     id: number;
-    tipo: String;
+    tipo: string;
     valor: number;
-    comentario: String;
+    comentario: string;
     fecha: Date;
     id_finca: number;
 }

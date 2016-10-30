@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, ToastController, Events, AlertController } from 'ionic-angular';
+import { NavController, Events, AlertController } from 'ionic-angular';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
 import { Camera } from 'ionic-native';
@@ -19,58 +19,76 @@ export class AddAnimalPage {
   animal: Animal;
   constructor(public navCtrl: NavController,
     private client: AnimalClient,
-    private toast: ToastController,
     private events: Events,
     private store: Storage,
-    private alertCtrl: AlertController    
+    private alertCtrl: AlertController
   ) {
     this.animal = new Animal;
     this.animal.imagen = '';
-    store.get("idfinca").then((value: number)=>{
+    store.get("idfinca").then((value: number) => {
       this.animal.id_finca = value;
-      console.log("id finca es "+ this.animal.id_finca)
+      console.log("id finca es " + this.animal.id_finca)
     });
   }
 
   ionViewDidLoad() {
     console.log('Hello AddAnimal Page');
-  }
-
-  SetSexo(s: String) {
-    console.log(s);
-    delete this.animal.sexo; 
-    this.animal.sexo = s;
-    if(s = 'Macho'){
-      this.animal.litros_diarios = "No aplica";
-    }
-  }
-
-  SetTipo(t: String) {
-    console.log(t);
-    delete this.animal.tipo;    
-    this.animal.tipo = t;
-  }
+  }  
 
   save() {
-    console.log("animal añadido "+JSON.stringify(this.animal));
+    if (this.animal.sexo = 'Macho') {
+      delete this.animal.litros_diarios;
+      this.animal.litros_diarios = "No aplica";
+    }
     this.client.insert(this.animal).subscribe(
       (res) => {
         this.processResponse(res);
-        this.events.publish("reloadAnimals");
-        this.navCtrl.pop();
       }
       , (err) => this.processResponse(false));
   }
 
   processResponse(success: boolean) {
-    let msg;
+    let confirm;
     if (success) {
-      msg = this.toast.create({ message: "Exito !", duration: 3000 });
+      confirm = this.alertCtrl.create({
+        title: 'Animal Añadido Correctamente',
+        message: 'Los datos fueron ingresados sin errores',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.events.publish("reloadAnimals");
+              this.navCtrl.pop();
+              console.log('OK');
+            }
+          }
+        ]
+      });
 
     } else {
-      msg = this.toast.create({ message: "Error !", duration: 3000 });
+      confirm = this.alertCtrl.create({
+        title: 'Error',
+        message: 'Hubo un problema al añadir el animal',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.events.publish("reloadAnimals");
+              this.navCtrl.pop();
+              console.log('OK');
+            }
+          },
+          {
+            text: 'Volver a intentar',
+            handler: () => {
+              this.save();
+              console.log('volver a intentar');
+            }
+          }
+        ]
+      })
     }
-    msg.present();
+    confirm.present();
   }
 
   imagen() {
@@ -98,28 +116,28 @@ export class AddAnimalPage {
   }
 
 
-  camara(){
-    Camera.getPicture({quality: 100, destinationType: Camera.DestinationType.DATA_URL, saveToPhotoAlbum: true }).then((imageData) => {
- // imageData is either a base64 encoded string or a file URI
- // If it's base64:
- let base64Image = 'data:image/jpeg;base64,' + imageData;
- this.animal.imagen = base64Image;
- console.log(this.animal.imagen);
-}, (err) => {
- // Handle error
-});
+  camara() {
+    Camera.getPicture({ quality: 100, destinationType: Camera.DestinationType.DATA_URL, saveToPhotoAlbum: true }).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.animal.imagen = base64Image;
+      console.log(this.animal.imagen);
+    }, (err) => {
+      // Handle error
+    });
   }
 
-  galeria(){
-    Camera.getPicture({destinationType: Camera.DestinationType.DATA_URL, sourceType: Camera.PictureSourceType.PHOTOLIBRARY }).then((imageData) => {
- // imageData is either a base64 encoded string or a file URI
- // If it's base64:
- let base64Image = 'data:image/jpeg;base64,' + imageData;
- this.animal.imagen = base64Image;
- console.log(this.animal.imagen);
-}, (err) => {
- // Handle error
-});
+  galeria() {
+    Camera.getPicture({ destinationType: Camera.DestinationType.DATA_URL, sourceType: Camera.PictureSourceType.PHOTOLIBRARY }).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.animal.imagen = base64Image;
+      console.log(this.animal.imagen);
+    }, (err) => {
+      // Handle error
+    });
   }
 
 }

@@ -6,25 +6,33 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Agregar Fincas</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>Agregar Fincas</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-  <ion-item>
-    <ion-label floating>Nombre:</ion-label>
-    <ion-input type="text" [(ngModel)]="finca.nombre"></ion-input>
-  </ion-item>
+	<ion-item>
+		<ion-label floating>Nombre:</ion-label>
+		<ion-input type="text" [(ngModel)]="finca.nombre"></ion-input>
+	</ion-item>
 
-  <ion-item>
-    <ion-label floating>Dirección:</ion-label>
-    <ion-input type="text" [(ngModel)]="finca.direccion"></ion-input>
-  </ion-item>
+	<ion-item>
+		<ion-label floating>Dirección:</ion-label>
+		<ion-input type="text" [(ngModel)]="finca.direccion"></ion-input>
+	</ion-item>
+  
+	<div *ngIf="finca.imagen == '' ">
+		<img src="../assets/img/add-image.png" (click)="imagen()">
+	</div>
 
-  <button ion-button (click)="save()">Agregar</button>
+	<div *ngIf="finca.imagen != ''">
+		<img src="{{finca.imagen}}" (click)="imagen()">
+	</div>
+
+	<button ion-button (click)="save()">Agregar</button>
 
 </ion-content>

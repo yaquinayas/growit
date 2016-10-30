@@ -24,7 +24,7 @@ export class InfoPage {
   cantidad: number;
   machos: number;
   hembras: number;
-  id: String;
+  id: string;
   constructor(public navCtrl: NavController,
     private client: FincaClient,
     private animales: AnimalClient,
@@ -55,11 +55,11 @@ export class InfoPage {
     console.log('Hello InfoPage Page');
   }
 
-  loadDetails(id: String) {
+  loadDetails(id: string) {
     this.client.getOne(id).subscribe((res) => { this.data = res });
   }
 
-  NumberOfAnimals(id: String) {
+  NumberOfAnimals(id: string) {
     this.animales.getAllOfFinca(id).subscribe((res) => {
       this.animal = res;
       this.cantidad = res.length;
@@ -67,7 +67,7 @@ export class InfoPage {
     });
   }
 
-  Genders(id: String, sexo: String) {
+  Genders(id: string, sexo: string) {
     this.animales.getAllOfFincaGender(id, sexo).subscribe((res) => {
       if (sexo == 'Macho') {
         this.machos = res.length;

@@ -25,7 +25,7 @@
 	</ion-item>
 
 	<br>
-	<ion-list radio-group>
+	<!--<ion-list radio-group>
 		<ion-list-header>
 			Sexo
 		</ion-list-header>
@@ -39,14 +39,25 @@
 			<ion-label>Hembra</ion-label>
 			<ion-radio (click)="SetSexo(s='Hembra')" name="sexo" value="Hembra"></ion-radio>
 		</ion-item>
+	</ion-list>-->
+
+	<ion-list>
+		<ion-item>
+			<ion-label>Sexo</ion-label>
+			<ion-select [(ngModel)]="animal.sexo">
+				<ion-option value="Macho">Macho</ion-option>
+				<ion-option value="Hembra">Hembra</ion-option>
+			</ion-select>
+		</ion-item>
 	</ion-list>
+
 	<ion-item>
 		<ion-label>Fecha de nacimiento</ion-label>
 		<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
 	</ion-item>
 
 	<br>
-	<ion-list radio-group>
+	<!--<ion-list radio-group>
 		<ion-list-header>
 			Tipo
 		</ion-list-header>
@@ -60,6 +71,16 @@
 			<ion-label>Leche</ion-label>
 			<ion-radio (click)="SetTipo(t='Leche')" value="Leche"></ion-radio>
 		</ion-item>
+	</ion-list>-->
+
+	<ion-list>
+		<ion-item>
+			<ion-label>Tipo</ion-label>
+			<ion-select [(ngModel)]="animal.tipo">
+				<ion-option value="Leche">Leche</ion-option>
+				<ion-option value="Carne">Carne</ion-option>
+			</ion-select>
+		</ion-item>
 	</ion-list>
 
 
@@ -69,6 +90,11 @@
 		<ion-input type="number" [(ngModel)]="animal.litros_diarios"></ion-input>
 	</ion-item>
 
+	<ion-item hidden *ngIf="animal.sexo == 'Macho'">
+		<ion-label floating>Litros diarios</ion-label>
+		<ion-input type="text" ng-value="No aplica" [(ngModel)]="animal.litros_diarios"></ion-input>
+	</ion-item>
+
 
 	<ion-item>
 		<ion-label floating>Peso</ion-label>
@@ -76,11 +102,11 @@
 	</ion-item>
 
 	<div *ngIf="animal.imagen == '' ">
-		<img src="../assets/img/add-image.png"  (click)="imagen()">
+		<img src="../assets/img/add-image.png" (click)="imagen()">
 	</div>
 
-	<div *ngIf="animal.image != ''">
-		<img src="{{animal.imagen}}">
+	<div *ngIf="animal.imagen != ''">
+		<img src="{{animal.imagen}}" (click)="imagen()">
 	</div>
 
 	<button ion-button (click)="save()">Agregar</button>

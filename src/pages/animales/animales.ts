@@ -14,7 +14,7 @@ import { AddAnimalPage } from '../add-animal/add-animal';
 })
 export class AnimalsPage {
   data: Animal[];
-  id: String;
+  id: string;
 
   constructor(public navCtrl: NavController,
     private event: Events,
@@ -22,7 +22,7 @@ export class AnimalsPage {
     private Storage: Storage) {
     this.data = [];
     this.id = ""
-    Storage.get("idfinca").then((value: String) => {
+    Storage.get("idfinca").then((value: string) => {
       this.id = value;
       this.loadAnimals(this.id);
     });
@@ -37,12 +37,12 @@ export class AnimalsPage {
     console.log('Hello Animal Page');
   }
 
-  loadAnimals(id: String) {
+  loadAnimals(id: string) {
     console.log("entro a cargar animales" + id);
     this.client.getAllOfFinca(id).subscribe((res) => { this.data = res });
   }
 
-  goToAnimalDetails(id: String) {
+  goToAnimalDetails(id: string) {
     this.navCtrl.push(AnimalDetailsPage,{
       ida: id
     })
