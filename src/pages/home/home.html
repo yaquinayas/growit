@@ -29,27 +29,33 @@
 <ion-content padding>
 
 	<ion-card *ngFor="let u of data">
-		<div style="position: relative">
-			<ion-card-content>
-				<ion-fab right top>
-					<button ion-fab mini clear class="fab-finca" (click)="deleteFinca(id = u.idfinca)">
-        <ion-icon color="secundary" name="remove-circle"></ion-icon>
-      </button>
-				</ion-fab>
-				<ion-grid>
-					<ion-row (click)="goToFincaDetails(id = u.idfinca )">
-						<ion-col width-50>
-							<img src="{{u.imagen}}">
-						</ion-col>
-						<ion-col width-50>
-							<h3><b>Finca: </b> {{u.nombre}}.</h3>
-							<h3> {{u.direccion}}</h3>
-						</ion-col>
 
-					</ion-row>
-				</ion-grid>
-			</ion-card-content>
-		</div>
+		<ion-card-content>
+
+			<ion-grid>
+				<!--<ion-icon class="right" name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>-->
+				<ion-row >
+					<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
+						<img class="img-finca" src="{{u.imagen}}">
+					</ion-col>
+					<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
+						<h2><b>Finca: </b> {{u.nombre}}.</h2>
+						<h2> {{u.direccion}}</h2>
+					</ion-col>
+					<ion-col>
+						<ion-icon class="right" name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>
+						<br>
+						<br>
+						<ion-icon color="primary" name="create" (click)="goToEdit(id = u.idfinca)"></ion-icon>
+					</ion-col>
+				</ion-row>
+
+				<!--<ion-row>
+						<ion-icon color="danger" name="close-circle"></ion-icon>
+					</ion-row>-->
+			</ion-grid>
+		</ion-card-content>
+
 	</ion-card>
 
 

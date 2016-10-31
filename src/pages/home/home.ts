@@ -10,6 +10,7 @@ import { AddFincasPage } from '../add-fincas/add-fincas';
 import { FincaDetailsPage } from '../finca-details/finca-details';
 import { TabsPage } from '../tabs-page/tabs-page';
 import { UserProfile } from '../user-profile/user-profile';
+import { EditFinca } from '../edit-finca/edit-finca';
 
 @Component({
   selector: 'page-home',
@@ -48,7 +49,7 @@ export class HomePage {
           this.loadFincas(id);
         });
       });
-    }   
+    }
 
 
   }
@@ -93,7 +94,7 @@ export class HomePage {
     this.navCtrl.push(UserProfile);
   }
 
-  CloseSession() {    
+  CloseSession() {
     this.Storage.set("logged", false);
     this.navCtrl.setRoot(LoginPage);
 
@@ -131,7 +132,7 @@ export class HomePage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadHome");              
+              this.events.publish("reloadHome");
               console.log('OK');
             }
           }
@@ -146,7 +147,7 @@ export class HomePage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadHome");              
+              this.events.publish("reloadHome");
               console.log('OK');
             }
           }
@@ -157,8 +158,36 @@ export class HomePage {
     }
   }
 
-    ngOnDestroy() {
-      this.events.unsubscribe("reloadHome");
-   }
+  confirmation(id: string) {
+    let confirm = this.alertCtrl.create({
+      title: 'Confirmación',
+      message: '¿Esta seguro quiere eliminar la finca?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.deleteFinca(id);
+            console.log("eliminar finca " + id);
+          }
+        },
+        {
+          text: 'cancelar',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  goToEdit(id: string) {
+    this.navCtrl.push(EditFinca, {
+      idfinca: id
+    })
+  }
+
+  ngOnDestroy() {
+    this.events.unsubscribe("reloadHome");
+  }
 
 }

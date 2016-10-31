@@ -24,14 +24,19 @@
 		<ion-label floating>Dirección:</ion-label>
 		<ion-input type="text" [(ngModel)]="finca.direccion"></ion-input>
 	</ion-item>
-  
-	<div *ngIf="finca.imagen == '' ">
-		<img src="../assets/img/add-image.png" (click)="imagen()">
-	</div>
 
-	<div *ngIf="finca.imagen != ''">
+	<ion-item *ngIf="finca.imagen == '' " >
+		<button ion-button outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
+			&nbsp;Imagen
+		</button>		 
+	</ion-item>
+	
+	<ion-item *ngIf="finca.imagen != ''">
+		<ion-header>
+			Imagen
+		</ion-header>
 		<img src="{{finca.imagen}}" (click)="imagen()">
-	</div>
+	</ion-item>
 
 	<button ion-button (click)="save()">Agregar</button>
 
