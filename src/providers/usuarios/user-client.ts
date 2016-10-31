@@ -13,15 +13,19 @@ import { User } from './user';
 @Injectable()
 export class UserClient {
     url: string = "http://192.168.0.12:8080/usuarios";
-    constructor(public http: Http) {}
+    constructor(public http: Http) { }
 
-    login(User:User) {
-        return this.http.post(this.url+"/login", User).map(this.processArray).catch(this.processCatch);
+    login(User: User) {
+        return this.http.post(this.url + "/login", User).map(this.processArray).catch(this.processCatch);
     }
-    insert(User:User){
-    return this.http.post(this.url, User).map(this.process).catch(this.processCatch);
+    insert(User: User) {
+        return this.http.post(this.url, User).map(this.process).catch(this.processCatch);
 
-  }
+    }
+
+    getOne(id: string): Observable<User[]> {
+        return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
+    }
     private process(res: Response) {
         let body = res.json();
         return body.success;
@@ -29,12 +33,9 @@ export class UserClient {
 
     private processArray(res: Response) {
         let body = res.json();
-        console.log("body = "+body);
-        console.log("body.success = "+body.success);
+        console.log("body = " ,body);
+        console.log("body.success = " + body.success);
         console.log("body.userid =" + body.userid);
-
-
-
         return body;
     }
 

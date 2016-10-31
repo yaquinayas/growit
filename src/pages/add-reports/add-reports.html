@@ -15,37 +15,30 @@
 
 
 <ion-content padding>
-	<ion-list radio-group>
-		<ion-list-header>
-			Tipo
-		</ion-list-header>
-
+	<ion-list>
 		<ion-item>
-			<ion-label>Ingreso</ion-label>
-			<ion-radio (click)="SetTipo(t='Ingreso')" name="tipo" value="Ingreso"></ion-radio>
+			<ion-label>Tipo</ion-label>
+			<ion-select [(ngModel)]="reporte.tipo">
+				<ion-option value="Ingreso">Ingreso</ion-option>
+				<ion-option value="Egreso">Egreso</ion-option>
+			</ion-select>
 		</ion-item>
 
 		<ion-item>
-			<ion-label>Egreso</ion-label>
-			<ion-radio (click)="SetTipo(t='Egreso')" name="tipo" value="Egreso"></ion-radio>
+			<ion-label floating>Valor</ion-label>
+			<ion-input type="number" [(ngModel)]="reporte.valor"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label floating>Comentario</ion-label>
+			<ion-input type="text" [(ngModel)]="reporte.comentario"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Fecha</ion-label>
+			<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="reporte.fecha"></ion-datetime>
 		</ion-item>
 	</ion-list>
-
-	<ion-item>
-		<ion-label floating>Valor</ion-label>
-		<ion-input type="number" [(ngModel)]="reporte.valor"></ion-input>
-	</ion-item>
-
-	<ion-item>
-		<ion-label floating>Comentario</ion-label>
-		<ion-input type="text" [(ngModel)]="reporte.comentario"></ion-input>
-	</ion-item>
-
-	<ion-item>
-		<ion-label>Fecha</ion-label>
-		<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="reporte.fecha"></ion-datetime>
-	</ion-item>
-
 	<button ion-button (click)="save()">Agregar</button>
 
 

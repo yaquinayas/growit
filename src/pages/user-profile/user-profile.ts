@@ -16,13 +16,27 @@ import { Storage } from '@ionic/Storage';
   templateUrl: 'user-profile.html'
 })
 export class UserProfile {
+  data: User[];
 
   constructor(public navCtrl: NavController,
     private usrclient: UserClient,
-    private loc: Storage) { }
+    private loc: Storage) {
+    this.data = [];
+    loc.get("userid").then((value: string) => {
+      let id = value;
+      console.log("id es" + id);
+      this.loadUser(id);
+    });
+  }
 
   ionViewDidLoad() {
     console.log('Hello UserProfile Page');
   }
+
+  loadUser(id: string) {
+    this.usrclient.getOne(id).subscribe(
+      (res) => { this.data = res });
+  }
+
 
 }

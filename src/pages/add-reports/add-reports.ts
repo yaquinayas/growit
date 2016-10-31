@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams, ToastController } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController } from 'ionic-angular';
 
 import { ReportClient } from '../../providers/reportes/report-client';
 import { Reporte } from '../../providers/reportes/reporte';
@@ -22,15 +22,15 @@ export class AddReportsPage {
   constructor(public navCtrl: NavController,
     private client: ReportClient,
     private store: Storage,
-    private toast: ToastController,
+    private alertCtrl: AlertController,
     private events: Events,
     private params: NavParams) {
     this.reporte = new Reporte();
     store.get("idfinca").then((value: number) => {
       this.reporte.id_finca = value;
       console.log("id finca es" + this.reporte.id_finca)
-    });   
-    
+    });
+
 
 
   }
@@ -42,23 +42,55 @@ export class AddReportsPage {
   save() {
     this.client.insert(this.reporte).subscribe(
       (res) => {
-        this.processResponse(res);    
-        this.events.publish("ReloadDetails");
-        this.navCtrl.setRoot(AddReportsPage);    
+        this.processResponse(res);
+
       }
       , (err) => this.processResponse(false)
     );
   }
 
   processResponse(success: boolean) {
-    let msg;
+    let confirm;
     if (success) {
-      msg = this.toast.create({ message: "Exito !", duration: 3000 });
+      confirm = this.alertCtrl.create({
+        title: 'Reporte Añadido Correctamente',
+        message: 'Los datos fueron ingresados sin errores',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.events.publish("ReloadDetails");
+              this.navCtrl.setRoot(AddReportsPage);
+              console.log('OK');
+            }
+          }
+        ]
+      });
 
     } else {
-      msg = this.toast.create({ message: "Error !", duration: 3000 });
+      confirm = this.alertCtrl.create({
+        title: 'Error',
+        message: 'Hubo un problema al añadir el reporte',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.events.publish("ReloadDetails");
+              this.navCtrl.setRoot(AddReportsPage);
+              console.log('OK');
+            }
+          },
+          {
+            text: 'Volver a intentar',
+            handler: () => {
+              this.save();
+              console.log('volver a intentar');
+            }
+          }
+        ]
+      })
     }
-    msg.present();
+    confirm.present();
   }
 
   SetTipo(t: string) {

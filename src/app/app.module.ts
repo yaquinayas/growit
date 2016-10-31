@@ -42,7 +42,8 @@ import { Storage } from '@ionic/Storage';
     AddAnimalPage,
     AddReportsPage,
     FinanzasPage,
-    ReportDetailPage
+    ReportDetailPage,
+    UserProfile
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -64,7 +65,8 @@ import { Storage } from '@ionic/Storage';
     AddAnimalPage,
     AddReportsPage,
     FinanzasPage,
-    ReportDetailPage
+    ReportDetailPage,
+    UserProfile
   ],
   providers: [
     Storage,

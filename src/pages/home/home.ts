@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Storage } from '@ionic/Storage';
 import { NavController, Events, NavParams, AlertController, MenuController } from 'ionic-angular';
 
@@ -25,7 +25,7 @@ export class HomePage {
     private alertCtrl: AlertController,
     private menu: MenuController) {
 
-    menu.enable(true);
+    
     this.data = [];
     let idparams = params.get('idf');
     if (idparams) {
@@ -101,6 +101,10 @@ export class HomePage {
       idf: id
     }
     );
+  }
+
+  ngOnDestroy() {
+    this.events.unsubscribe("reloadHome");
   }
 
 }

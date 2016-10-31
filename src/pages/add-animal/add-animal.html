@@ -14,34 +14,20 @@
 
 
 <ion-content padding>
-	<ion-item>
-		<ion-label floating>Nombre</ion-label>
-		<ion-input type="text" [(ngModel)]="animal.nombre"></ion-input>
-	</ion-item>
-
-	<ion-item>
-		<ion-label floating>Raza</ion-label>
-		<ion-input type="text" [(ngModel)]="animal.raza"></ion-input>
-	</ion-item>
-
-	<br>
-	<!--<ion-list radio-group>
-		<ion-list-header>
-			Sexo
-		</ion-list-header>
-
-		<ion-item>
-			<ion-label>Macho</ion-label>
-			<ion-radio (click)="SetSexo(s='Macho')" name="sexo" value="Macho"></ion-radio>
-		</ion-item>
-
-		<ion-item>
-			<ion-label>Hembra</ion-label>
-			<ion-radio (click)="SetSexo(s='Hembra')" name="sexo" value="Hembra"></ion-radio>
-		</ion-item>
-	</ion-list>-->
 
 	<ion-list>
+		<ion-item>
+			<ion-label floating>Nombre</ion-label>
+			<ion-input type="text" [(ngModel)]="animal.nombre"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label floating>Raza</ion-label>
+			<ion-input type="text" [(ngModel)]="animal.raza"></ion-input>
+		</ion-item>
+
+		<br>
+
 		<ion-item>
 			<ion-label>Sexo</ion-label>
 			<ion-select [(ngModel)]="animal.sexo">
@@ -49,31 +35,14 @@
 				<ion-option value="Hembra">Hembra</ion-option>
 			</ion-select>
 		</ion-item>
-	</ion-list>
 
-	<ion-item>
-		<ion-label>Fecha de nacimiento</ion-label>
-		<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
-	</ion-item>
-
-	<br>
-	<!--<ion-list radio-group>
-		<ion-list-header>
-			Tipo
-		</ion-list-header>
 
 		<ion-item>
-			<ion-label>Carne</ion-label>
-			<ion-radio (click)="SetTipo(t='Carne')" value="Carne"></ion-radio>
+			<ion-label>Fecha de nacimiento</ion-label>
+			<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
 		</ion-item>
 
-		<ion-item>
-			<ion-label>Leche</ion-label>
-			<ion-radio (click)="SetTipo(t='Leche')" value="Leche"></ion-radio>
-		</ion-item>
-	</ion-list>-->
-
-	<ion-list>
+		<br>
 		<ion-item>
 			<ion-label>Tipo</ion-label>
 			<ion-select [(ngModel)]="animal.tipo">
@@ -81,33 +50,27 @@
 				<ion-option value="Carne">Carne</ion-option>
 			</ion-select>
 		</ion-item>
+
+		<ion-item *ngIf="animal.sexo == 'Hembra'">
+			<ion-label floating>Litros diarios</ion-label>
+			<ion-input type="number" [(ngModel)]="animal.litros_diarios"></ion-input>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label floating>Peso</ion-label>
+			<ion-input type="number" [(ngModel)]="animal.peso"></ion-input>
+		</ion-item>
+
+		<div *ngIf="animal.imagen == '' ">
+			<img src="../assets/img/add-image.png" (click)="imagen()">
+		</div>
+
+		<div *ngIf="animal.imagen != ''">
+			<img src="{{animal.imagen}}" (click)="imagen()">
+		</div>
+
 	</ion-list>
 
-
-
-	<ion-item *ngIf="animal.sexo == 'Hembra'">
-		<ion-label floating>Litros diarios</ion-label>
-		<ion-input type="number" [(ngModel)]="animal.litros_diarios"></ion-input>
-	</ion-item>
-
-	<ion-item hidden *ngIf="animal.sexo == 'Macho'">
-		<ion-label floating>Litros diarios</ion-label>
-		<ion-input type="text" ng-value="No aplica" [(ngModel)]="animal.litros_diarios"></ion-input>
-	</ion-item>
-
-
-	<ion-item>
-		<ion-label floating>Peso</ion-label>
-		<ion-input type="number" [(ngModel)]="animal.peso"></ion-input>
-	</ion-item>
-
-	<div *ngIf="animal.imagen == '' ">
-		<img src="../assets/img/add-image.png" (click)="imagen()">
-	</div>
-
-	<div *ngIf="animal.imagen != ''">
-		<img src="{{animal.imagen}}" (click)="imagen()">
-	</div>
 
 	<button ion-button (click)="save()">Agregar</button>
 

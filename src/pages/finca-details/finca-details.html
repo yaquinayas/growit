@@ -7,7 +7,7 @@
 <ion-header>
 
 	<ion-navbar>
-		<ion-title>{{data.nombre}}</ion-title>
+		<ion-title>{{data.nombre}}</ion-title>		
 	</ion-navbar>
 
 </ion-header>
@@ -27,11 +27,17 @@
 
 			<button ion-item (click)="goToReportDetail(id = id)">
       <ion-icon name="clipboard"  item-left color="primary"></ion-icon>
-      Informes
+      Informes Financieros
     </button>
+
+		<button ion-item (click)="goToHome()">
+      <ion-icon name="exit"  item-left color="primary"></ion-icon>
+      Volver a Fincas
+    </button>
+		
 		</ion-list>
 	</ion-card>
-	<button (click)="goToHome()">Salir</button>
+	
 
 
 

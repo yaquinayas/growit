@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams, AlertController  } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController, MenuController } from 'ionic-angular';
 
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
@@ -29,8 +29,10 @@ export class FincaDetailsPage {
     private client: FincaClient,
     private event: Events,
     private navParams: NavParams,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private menuCtrl: MenuController) {
 
+    
     this.data = [];
     this.id = navParams.get('id');
     this.loadDetails(this.id);
@@ -47,24 +49,24 @@ export class FincaDetailsPage {
 
   loadDetails(id: string) {
     console.log("entro");
-    this.client.getOne(id).subscribe((res) => { 
-      this.data = res 
+    this.client.getOne(id).subscribe((res) => {
+      this.data = res
     },
-    (err) => {
-      let confirm = this.alertCtrl.create({
+      (err) => {
+        let confirm = this.alertCtrl.create({
           title: 'Error',
           message: 'Hubo un problema al cargar los datos',
           buttons: [
             {
               text: 'Aceptar',
-              handler: () => {                
+              handler: () => {
                 console.log('OK');
               }
             }
           ]
         });
         confirm.present();
-    }
+      }
     );
   }
 
@@ -83,7 +85,11 @@ export class FincaDetailsPage {
   goToHome() {
     /*this.navCtrl.pop();
     this.navCtrl.setRoot(HomePage);*/
+    this.event.publish("reloadHome")
     this.event.publish("goBack");
   }
 
+  openMenu() {
+   this.menuCtrl.open();
+ }
 }

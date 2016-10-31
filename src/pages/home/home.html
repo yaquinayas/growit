@@ -7,45 +7,54 @@
 	</ion-navbar>
 </ion-header>
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Herramientas</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <button ion-item (click)="goToProfile()">
+	<ion-header>
+		<ion-toolbar>
+			<ion-title>Herramientas</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-content>
+		<ion-list>
+			<button ion-item (click)="goToProfile()">
         Ver Perfil
       </button>
-      <button ion-item (click)="CloseSession()">
+			<button ion-item (click)="CloseSession()">
         Cerrar Sesión
       </button>
-    </ion-list>
-  </ion-content>
+		</ion-list>
+	</ion-content>
 </ion-menu>
 
 <ion-nav id="nav" #content></ion-nav>
 
 <ion-content padding>
 
-	<ion-card *ngFor="let u of data" (click)="goToFincaDetails(id = u.idfinca )">
-		<ion-card-content>
-			<ion-grid>
-				<ion-row>
-					<ion-col width-50>
-						<img src="{{u.imagen}}">
-					</ion-col>
-					<ion-col width-50>
-						<h3><b>Finca: </b> {{u.nombre}}.</h3>
-						<h3> {{u.direccion}}</h3>
-					</ion-col>
+	<ion-card *ngFor="let u of data" >
+		<div style="position: relative">
+			<ion-card-content>
+				<ion-fab right top>
+					<button ion-fab mini class="fab-map" (click)="goToProfile()">
+        <ion-icon name='pin'></ion-icon>
+      </button>
+				</ion-fab>
+				<ion-grid>
+					<ion-row (click)="goToFincaDetails(id = u.idfinca )">
+						<ion-col width-50>
+							<img src="{{u.imagen}}">
+						</ion-col>
+						<ion-col width-50>
+							<h3><b>Finca: </b> {{u.nombre}}.</h3>
+							<h3> {{u.direccion}}</h3>
+						</ion-col>
 
-				</ion-row>
-			</ion-grid>
-		</ion-card-content>
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</div>
 	</ion-card>
+	
 
-	<button (click)="CloseSession()" color="secundary">salir</button>
+
+
 	<ion-fab bottom center>
 		<button ion-fab (click)="goToAddFincas()" color="secundary"><ion-icon name="add"></ion-icon></button>
 	</ion-fab>

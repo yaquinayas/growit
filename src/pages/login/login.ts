@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, Events, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, Events, LoadingController, AlertController } from 'ionic-angular';
 
 import { UserClient } from '../../providers/usuarios/user-client';
 import { User } from '../../providers/usuarios/user';
@@ -28,8 +28,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
     private loc: Storage,
-    private usrclient: UserClient,
-    private toast: ToastController,
+    private usrclient: UserClient,    
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
     this.usuario = new User();
