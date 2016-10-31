@@ -17,6 +17,7 @@ import { UserProfile } from '../user-profile/user-profile';
 })
 export class HomePage {
   data: Finca[];
+  idu: string;
   constructor(public navCtrl: NavController,
     private Storage: Storage,
     private client: FincaClient,
@@ -25,16 +26,18 @@ export class HomePage {
     private alertCtrl: AlertController,
     private menu: MenuController) {
 
-    
+
     this.data = [];
     let idparams = params.get('idf');
     if (idparams) {
+      this.idu = idparams;
       this.loadFincas(idparams);
       this.events.subscribe("reloadHome", () => {
         this.loadFincas(idparams);
       });
     } else {
       Storage.get("userid").then((value: string) => {
+        this.idu = value;
         let id = value;
         console.log("id es" + id);
         this.loadFincas(id);
@@ -81,7 +84,7 @@ export class HomePage {
     );
   }
 
-  goToProfile(){
+  goToProfile() {
     this.navCtrl.push(UserProfile);
   }
 
@@ -103,8 +106,60 @@ export class HomePage {
     );
   }
 
-  ngOnDestroy() {
-    this.events.unsubscribe("reloadHome");
+  deleteFinca(id: string) {
+    this.client.delete(id).subscribe(
+      (res) => {
+        this.processResponce(res);
+      },
+      (err) => {
+        this.processResponce(false);
+      }
+    );
   }
+
+  processResponce(res: boolean) {
+    if (res) {
+      let confirm = this.alertCtrl.create({
+        title: 'Finca eliminada',
+        message: 'La finca fue eliminada correctamente',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.events.publish("reloadHome");
+              this.navCtrl.setRoot(HomePage, {
+                id: this.idu
+              });
+              console.log('OK');
+            }
+          }
+        ]
+      });
+      confirm.present();
+    } else {
+      let confirm = this.alertCtrl.create({
+        title: 'Error',
+        message: 'Hubo un problema al eliminar',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.events.publish("reloadHome");
+              this.navCtrl.setRoot(HomePage, {
+                id: this.idu
+              });
+              console.log('OK');
+            }
+          }
+        ]
+      });
+      confirm.present();
+
+    }
+  }
+
+  // ngOnDestroy() {
+  //   this.events.unsubscribe("reloadHome");
+  // }
 
 }

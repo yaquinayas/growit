@@ -28,12 +28,12 @@
 
 <ion-content padding>
 
-	<ion-card *ngFor="let u of data" >
+	<ion-card *ngFor="let u of data">
 		<div style="position: relative">
 			<ion-card-content>
 				<ion-fab right top>
-					<button ion-fab mini class="fab-map" (click)="goToProfile()">
-        <ion-icon name='pin'></ion-icon>
+					<button ion-fab mini clear class="fab-finca" (click)="deleteFinca(id = u.idfinca)">
+        <ion-icon color="secundary" name="remove-circle"></ion-icon>
       </button>
 				</ion-fab>
 				<ion-grid>
@@ -51,7 +51,7 @@
 			</ion-card-content>
 		</div>
 	</ion-card>
-	
+
 
 
 

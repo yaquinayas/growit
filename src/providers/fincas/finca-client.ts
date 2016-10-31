@@ -25,7 +25,9 @@ export class FincaClient {
     }
     insert(finca: Finca) {
         return this.http.post(this.url, finca).map(this.process).catch(this.processCatch);
-
+    }
+    delete(id: string) {
+        return this.http.delete(this.url + "/" + id).map(this.process).catch(this.processCatch);
     }
     private process(res: Response) {
         let body = res.json();
