@@ -24,7 +24,7 @@ export class AddFincasPage {
     private alertCtrl: AlertController) {
     this.finca = new Finca;
     this.finca.imagen = '';
-    store.get("id").then((value: number) => {
+    store.get("userid").then((value: number) => {
       this.finca.idusr = value;
       console.log("id usr es" + this.finca.idusr)
     });

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams, AlertController, MenuController } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController, MenuController, LoadingController } from 'ionic-angular';
 
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
@@ -24,15 +24,17 @@ export class HomePage {
     private events: Events,
     private params: NavParams,
     private alertCtrl: AlertController,
-    private menu: MenuController) {
+    private menu: MenuController,
+    private loadingCtrl: LoadingController) {
 
-
+    this.menu.enable(true);
     this.data = [];
     let idparams = params.get('idf');
     if (idparams) {
       this.idu = idparams;
       this.loadFincas(idparams);
       this.events.subscribe("reloadHome", () => {
+        console.log("page reloaded by event");
         this.loadFincas(idparams);
       });
     } else {
@@ -42,14 +44,11 @@ export class HomePage {
         console.log("id es" + id);
         this.loadFincas(id);
         this.events.subscribe("reloadHome", () => {
+          console.log("page reloaded by event");
           this.loadFincas(id);
         });
       });
-    }
-    console.log("date " + Date.now());
-    //let id = params.get('idf');
-    // let holi = new Date(Date.now()).toLocalestring();
-    // console.log(holi);
+    }   
 
 
   }
@@ -60,12 +59,18 @@ export class HomePage {
 
   loadFincas(id: string) {
     console.log("entro");
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.getAllOfUsr(id).subscribe(
       (res) => {
+        loader.dismissAll();
         this.data = res
       },
       (err) => {
-
+        loader.dismissAll();
         let confirm = this.alertCtrl.create({
           title: 'Error',
           message: 'Hubo un problema al cargar los datos',
@@ -88,7 +93,7 @@ export class HomePage {
     this.navCtrl.push(UserProfile);
   }
 
-  CloseSession() {
+  CloseSession() {    
     this.Storage.set("logged", false);
     this.navCtrl.setRoot(LoginPage);
 
@@ -126,10 +131,7 @@ export class HomePage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadHome");
-              this.navCtrl.setRoot(HomePage, {
-                id: this.idu
-              });
+              this.events.publish("reloadHome");              
               console.log('OK');
             }
           }
@@ -144,10 +146,7 @@ export class HomePage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadHome");
-              this.navCtrl.setRoot(HomePage, {
-                id: this.idu
-              });
+              this.events.publish("reloadHome");              
               console.log('OK');
             }
           }
@@ -158,8 +157,8 @@ export class HomePage {
     }
   }
 
-  // ngOnDestroy() {
-  //   this.events.unsubscribe("reloadHome");
-  // }
+    ngOnDestroy() {
+      this.events.unsubscribe("reloadHome");
+   }
 
 }

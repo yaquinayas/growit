@@ -37,7 +37,8 @@ export class LoginPage {
   goToHome() {
     let loader = this.loadingCtrl.create({
       content: "Cargando",
-      duration: 100000000000000
+      duration: 100000000000000,
+      dismissOnPageChange: true
     });
     //this.loc.set("user",JSON.stringify({user: this.user, pass: this.pass}));  
     console.log("Usuario:" + this.user + " Password:" + this.pass);
@@ -48,14 +49,14 @@ export class LoginPage {
         console.log("res.success " + res.success);
         console.log("res.usrid " + res.userid);
         if (res.success) {
-          loader.dismissAll();
+          loader.dismiss();
           this.loc.set("userid", res.userid);          
           this.navCtrl.setRoot(HomePage, {
             idf: res.userid
           });
           this.loc.set("logged", true);
         } else {
-          loader.dismissAll();
+          loader.dismiss();
           this.loc.set("logged", false);
           this.processResponse(false);
         }
@@ -63,7 +64,7 @@ export class LoginPage {
       }
       , (err) => {
 
-        loader.dismissAll();
+        loader.dismiss();
         this.problemConection();
       }
     );

@@ -24,7 +24,7 @@ export class UserProfile {
     this.data = [];
     loc.get("userid").then((value: string) => {
       let id = value;
-      console.log("id es" + id);
+      console.log("id es " + id);
       this.loadUser(id);
     });
   }
