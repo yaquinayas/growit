@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events } from 'ionic-angular';
+import { NavController, Events, AlertController } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
 import { AnimalDetailsPage } from '../animal-details/animal-details';
 import { AddAnimalPage } from '../add-animal/add-animal';
+import { EditAnimal } from '../edit-animal/edit-animal';
 
 @Component({
   selector: 'page-about',
@@ -19,7 +20,9 @@ export class AnimalsPage {
   constructor(public navCtrl: NavController,
     private event: Events,
     private client: AnimalClient,
-    private Storage: Storage) {
+    private Storage: Storage,
+    private alertCtrl: AlertController
+  ) {
     this.data = [];
     this.id = ""
     Storage.get("idfinca").then((value: string) => {
@@ -27,8 +30,8 @@ export class AnimalsPage {
       this.loadAnimals(this.id);
     });
     this.event.subscribe("reloadAnimals", () => {
-        this.loadAnimals(this.id);
-      });
+      this.loadAnimals(this.id);
+    });
 
 
   }
@@ -43,13 +46,91 @@ export class AnimalsPage {
   }
 
   goToAnimalDetails(id: string) {
-    this.navCtrl.push(AnimalDetailsPage,{
+    this.navCtrl.push(AnimalDetailsPage, {
       ida: id
     })
   }
 
-  goToAdd(){
+  goToAdd() {
     this.navCtrl.push(AddAnimalPage);
+  }
+
+  deleteAnimal(id: string) {
+    this.client.delete(id).subscribe(
+      (res) => {
+        this.processResponce(res);
+      },
+      (err) => {
+        this.processResponce(false);
+      }
+    );
+  }
+
+  processResponce(res: boolean) {
+    if (res) {
+      let confirm = this.alertCtrl.create({
+        title: 'Animal eliminado',
+        message: 'El animal fue eliminado correctamente',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.event.publish("reloadAnimals");
+              console.log('OK');
+            }
+          }
+        ]
+      });
+      confirm.present();
+    } else {
+      let confirm = this.alertCtrl.create({
+        title: 'Error',
+        message: 'Hubo un problema al eliminar',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.event.publish("reloadAnimals");
+              console.log('OK');
+            }
+          }
+        ]
+      });
+      confirm.present();
+
+    }
+  }
+
+  confirmation(id: string) {
+    let confirm = this.alertCtrl.create({
+      title: 'Confirmación',
+      message: '¿Esta seguro quiere eliminar el animal?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.deleteAnimal(id);
+            console.log("eliminar aniaml " + id);
+          }
+        },
+        {
+          text: 'cancelar',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  goToEdit(id: string) {
+    this.navCtrl.push(EditAnimal, {
+      ida: id
+    })
+  }
+
+  ngOnDestroy() {
+    this.event.unsubscribe("reloadAnimals");
   }
 
 

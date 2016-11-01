@@ -25,14 +25,14 @@
 		<ion-input type="text" value="{{data.direccion}}" [(ngModel)]="finca.direccion"></ion-input>
 	</ion-item>
 	<br>
-	<ion-item *ngIf="finca.imagen == '' ">
+	<ion-item *ngIf="photochanged == '0'">
 		<ion-header>
 			Imagen
 		</ion-header>
 		<img src="{{data.imagen}}" (click)="imagen()">
 	</ion-item>
 
-	<ion-item *ngIf="finca.imagen != ''">
+	<ion-item *ngIf="photochanged == '1'">
 		<ion-header>
 			Imagen
 		</ion-header>

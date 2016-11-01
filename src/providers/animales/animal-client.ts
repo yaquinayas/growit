@@ -34,6 +34,13 @@ export class AnimalClient {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
 
+    delete(id: string) {
+        return this.http.delete(this.url + "/" + id).map(this.process).catch(this.processCatch);
+    }
+    update(id: string, animal: Animal){
+        return this.http.put(this.url + "/" + id, animal).map(this.process).catch(this.processCatch);
+    }
+
     private process(res: Response) {
         let body = res.json();
         return body.success;

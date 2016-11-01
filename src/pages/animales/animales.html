@@ -7,29 +7,35 @@
 </ion-header>
 
 <ion-content padding>
-	
+
 	<ion-card *ngFor="let u of data" (click)="goToAnimalDetails(id = u.id )">
 		<ion-card-content>
 			<ion-grid>
 				<ion-row>
-					<ion-col width-50>
-						<img src="{{u.imagen}}" >
+					<ion-col width-50 (click)="goToAnimalDetails(id = u.id )">
+						<img src="{{u.imagen}}">
 					</ion-col>
-					<ion-col width-50>
+					<ion-col width-50 (click)="goToAnimalDetails(id = u.id )">
 						<h3><b>Nombre: </b> {{u.nombre}}</h3>
 						<h3><b>Raza:</b> {{u.raza}}</h3>
 						<h3><b>Sexo:</b>{{u.sexo}} </h3>
+					</ion-col>
+					<ion-col>
+						<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>
+						<br>
+						<br>
+						<ion-icon color="primary" name="create" (click)="goToEdit(id = u.idfinca)"></ion-icon>
 					</ion-col>
 
 				</ion-row>
 			</ion-grid>
 		</ion-card-content>
 	</ion-card>
-  <ion-fab bottom center>
+	<ion-fab bottom center>
 		<button ion-fab (click)="goToAdd()" color="secundary"><ion-icon name="add"></ion-icon></button>
 	</ion-fab>
-  
-<!--<ion-thumbnail item-left>
+
+	<!--<ion-thumbnail item-left>
 	<img src="img/thumbnail-puppy-1.jpg">
 </ion-thumbnail>-->
 

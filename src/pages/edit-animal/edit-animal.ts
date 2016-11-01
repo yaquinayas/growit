@@ -1,70 +1,69 @@
 import { Component } from '@angular/core';
-import { Storage } from '@ionic/Storage';
 import { NavController, Events, AlertController, NavParams } from 'ionic-angular';
-import { Finca } from '../../providers/fincas/finca';
-import { FincaClient } from '../../providers/fincas/finca-client';
+import { Storage } from '@ionic/Storage';
+import { Animal } from '../../providers/animales/animal';
+import { AnimalClient } from '../../providers/animales/animal-client';
 import { Camera } from 'ionic-native';
 
+
 /*
-  Generated class for the EditFinca page.
+  Generated class for the EditAnimal page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-edit-finca',
-  templateUrl: 'edit-finca.html'
+  selector: 'page-edit-animal',
+  templateUrl: 'edit-animal.html'
 })
-export class EditFinca {
-  data: Finca[];
-  finca: Finca;
-  id: string;
+export class EditAnimal {
+  animal: Animal;
+  data: Animal[];
+  nac: string;
   photochanged: number;
+  ida: string;
   constructor(public navCtrl: NavController,
-    private client: FincaClient,
+    private client: AnimalClient,
     private events: Events,
     private store: Storage,
     private alertCtrl: AlertController,
-    private navParams: NavParams) {
+    private params: NavParams) {
     this.data = [];
-    this.finca = new Finca;   
+    this.animal = new Animal;
     this.photochanged = 0;
-    this.id = navParams.get('idfinca');
-    this.loadDetails(this.id);
-    
-  }
-
-  loadDetails(id: string) {
-    console.log("entro");
-    this.client.getOne(id).subscribe((res) => {
-      this.data = res
-     
-    },
-      (err) => {
-        let confirm = this.alertCtrl.create({
-          title: 'Error',
-          message: 'Hubo un problema al cargar los datos',
-          buttons: [
-            {
-              text: 'Aceptar',
-              handler: () => {
-                console.log('OK');
-              }
-            }
-          ]
-        });
-        confirm.present();
-      }
-    );
+    let param = params.get('ida');
+    this.ida = param;
+    store.get("idfinca").then((value: number) => {
+      this.animal.id_finca = value;
+      console.log("id finca es " + this.animal.id_finca)
+    });
   }
 
   ionViewDidLoad() {
-    console.log('Hello EditFinca Page');
+    console.log('Hello EditAnimal Page');
+  }
+
+  loadDetails(id: string) {
+    this.client.getOne(id).subscribe((res) => {
+
+      this.data = res;
+      let all = JSON.stringify(this.data);
+      let nac = all.split(',');
+      let nac2 = nac[4].split(':"');
+      let nac3 = nac2[1].split('T');
+      let nac4 = nac3[0].split('"');
+      this.nac = nac4[0];     
+
+      console.log("nac es " + nac3[0]);
+
+
+      console.log(JSON.stringify(this.data));
+    });
   }
 
   save() { 
        
-    this.client.update(this.id,this.finca).subscribe(
+    this.client.update(this.ida,this.animal).subscribe(
       (res) => {
         this.processResponse(res);
 
@@ -116,6 +115,7 @@ export class EditFinca {
     confirm.present();
   }
 
+
   imagen() {
     let confirm = this.alertCtrl.create({
       title: 'Insertar imagen',
@@ -146,9 +146,9 @@ export class EditFinca {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.finca.imagen = base64Image;
+      this.animal.imagen = base64Image;
       this.photochanged = 1;
-      console.log(this.finca.imagen);
+      console.log(this.animal.imagen);
     }, (err) => {
       // Handle error
     });
@@ -159,12 +159,14 @@ export class EditFinca {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.finca.imagen = base64Image;
+      this.animal.imagen = base64Image;
       this.photochanged = 1;
-      console.log(this.finca.imagen);
+      console.log(this.animal.imagen);
     }, (err) => {
       // Handle error
     });
   }
+
+
 
 }
