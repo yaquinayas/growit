@@ -18,3 +18,11 @@
 .transparent{
     background: rgba(0,0,0,0);
 }
+
+.background{
+    background-image: url("../assets/img/fondom5.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}

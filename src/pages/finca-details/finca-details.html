@@ -4,41 +4,39 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<div class="background">
+	<ion-header>
 
-	<ion-navbar color="bar">
-		<ion-title>{{data.nombre}}</ion-title>		
-	</ion-navbar>
+		<ion-navbar color="bar">
+			<ion-title>{{data.nombre}}</ion-title>
+		</ion-navbar>
 
-</ion-header>
+	</ion-header>
 
 
-<ion-content padding>
+	<ion-content padding class="transparent">
 
-	<ion-card>
-		<img src="{{data.imagen}}" width="50%" height="50%">
-	</ion-card>
-	<br>
-	<ion-card>
-		<ion-list>
-			<button ion-item (click)="goToInfo(id = id )">
+		<ion-card>
+			<img src="{{data.imagen}}" width="50%" height="50%">
+		</ion-card>
+		<br>
+		<ion-card>
+			<ion-list>
+				<button ion-item (click)="goToInfo(id = id )">
       <ion-icon name="information-circle" item-left color="primary" ></ion-icon>Información general
       </button>
 
-			<button ion-item (click)="goToReportDetail(id = id)">
-      <ion-icon name="clipboard"  item-left color="primary"></ion-icon>
-      Informes Financieros
-    </button>
+				<button ion-item (click)="goToReportDetail(id = id)">
+					<ion-icon name="clipboard"  item-left color="primary"></ion-icon>
+					Informes Financieros
+				</button>
 
-		<button ion-item (click)="goToHome()">
-      <ion-icon name="exit"  item-left color="primary"></ion-icon>
-      Volver a Fincas
-    </button>
-		
-		</ion-list>
-	</ion-card>
-	
+				<button ion-item (click)="goToHome()">
+					<ion-icon name="exit"  item-left color="primary"></ion-icon>
+					Volver a Fincas
+				</button>
 
-
-
-</ion-content>
+			</ion-list>
+		</ion-card>
+	</ion-content>
+</div>

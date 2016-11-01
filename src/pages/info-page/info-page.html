@@ -4,22 +4,24 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<div class="background">
+	<ion-header>
 
-  <ion-navbar color="bar">
-    <ion-title>Información General</ion-title>
-  </ion-navbar>
+		<ion-navbar color="bar">
+			<ion-title>Información General</ion-title>
+		</ion-navbar>
 
-</ion-header>
+	</ion-header>
 
 
-<ion-content padding>
+	<ion-content padding class="transparent">
 
-  <h4><b>Nombre:</b> {{data.nombre}}</h4>
-  <h4><b>Dirección:</b> {{data.direccion}}</h4>
-  <h4><b>Numero de animales:</b> {{cantidad}}</h4>
-  <ion-icon name="paw">: 2</ion-icon>
-  <h4><b>Numero de machos: </b> {{machos}}</h4>
-  <h4><b>Numero de hembras: </b> {{hembras}}</h4>
+		<h4><b>Nombre:</b> {{data.nombre}}</h4>
+		<h4><b>Dirección:</b> {{data.direccion}}</h4>
+		<h4><b>Numero de animales:</b> {{cantidad}}</h4>
+		<ion-icon name="paw">: 2</ion-icon>
+		<h4><b>Numero de machos: </b> {{machos}}</h4>
+		<h4><b>Numero de hembras: </b> {{hembras}}</h4>
 
-</ion-content>
+	</ion-content>
+</div>
