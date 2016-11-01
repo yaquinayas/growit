@@ -4,78 +4,80 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<div class="backgorund">
+	<ion-header>
 
-	<ion-navbar color="bar">
-		<ion-title>Añadir un animal</ion-title>
-	</ion-navbar>
+		<ion-navbar color="bar">
+			<ion-title>Añadir un animal</ion-title>
+		</ion-navbar>
 
-</ion-header>
+	</ion-header>
 
-<ion-content padding>
+	<ion-content padding class="transparent">
 
-	<ion-list>
-		<ion-item>
-			<ion-label floating>Nombre</ion-label>
-			<ion-input type="text" [(ngModel)]="animal.nombre"></ion-input>
-		</ion-item>
+		<ion-list>
+			<ion-item>
+				<ion-label floating>Nombre</ion-label>
+				<ion-input type="text" [(ngModel)]="animal.nombre"></ion-input>
+			</ion-item>
 
-		<ion-item>
-			<ion-label floating>Raza</ion-label>
-			<ion-input type="text" [(ngModel)]="animal.raza"></ion-input>
-		</ion-item>
+			<ion-item>
+				<ion-label floating>Raza</ion-label>
+				<ion-input type="text" [(ngModel)]="animal.raza"></ion-input>
+			</ion-item>
 
-		<br>
+			<br>
 
-		<ion-item>
-			<ion-label>Sexo</ion-label>
-			<ion-select [(ngModel)]="animal.sexo">
-				<ion-option value="Macho">Macho</ion-option>
-				<ion-option value="Hembra">Hembra</ion-option>
-			</ion-select>
-		</ion-item>
+			<ion-item>
+				<ion-label>Sexo</ion-label>
+				<ion-select [(ngModel)]="animal.sexo">
+					<ion-option value="Macho">Macho</ion-option>
+					<ion-option value="Hembra">Hembra</ion-option>
+				</ion-select>
+			</ion-item>
 
 
-		<ion-item>
-			<ion-label>Fecha de nacimiento</ion-label>
-			<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
-		</ion-item>
+			<ion-item>
+				<ion-label>Fecha de nacimiento</ion-label>
+				<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
+			</ion-item>
 
-		<br>
-		<ion-item>
-			<ion-label>Tipo</ion-label>
-			<ion-select [(ngModel)]="animal.tipo">
-				<ion-option value="Leche">Leche</ion-option>
-				<ion-option value="Carne">Carne</ion-option>
-			</ion-select>
-		</ion-item>
+			<br>
+			<ion-item>
+				<ion-label>Tipo</ion-label>
+				<ion-select [(ngModel)]="animal.tipo">
+					<ion-option value="Leche">Leche</ion-option>
+					<ion-option value="Carne">Carne</ion-option>
+				</ion-select>
+			</ion-item>
 
-		<ion-item *ngIf="animal.sexo == 'Hembra'">
-			<ion-label floating>Litros diarios</ion-label>
-			<ion-input type="number" [(ngModel)]="animal.litros_diarios"></ion-input>
-		</ion-item>
+			<ion-item *ngIf="animal.sexo == 'Hembra'">
+				<ion-label floating>Litros diarios</ion-label>
+				<ion-input type="number" [(ngModel)]="animal.litros_diarios"></ion-input>
+			</ion-item>
 
-		<ion-item>
-			<ion-label floating>Peso</ion-label>
-			<ion-input type="number" [(ngModel)]="animal.peso"></ion-input>
-		</ion-item>
+			<ion-item>
+				<ion-label floating>Peso</ion-label>
+				<ion-input type="number" [(ngModel)]="animal.peso"></ion-input>
+			</ion-item>
 
-		<ion-item *ngIf="animal.imagen == '' ">
-			<button ion-button large outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
+			<ion-item *ngIf="animal.imagen == '' ">
+				<button ion-button large outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
 			&nbsp;Imagen
 		</button>
-		</ion-item>
+			</ion-item>
 
-		<ion-item *ngIf="animal.imagen != ''">
-			<ion-header>
-				Imagen
-			</ion-header>
-			<img src="{{animal.imagen}}" (click)="imagen()">
-		</ion-item>
+			<ion-item *ngIf="animal.imagen != ''">
+				<ion-header>
+					Imagen
+				</ion-header>
+				<img src="{{animal.imagen}}" (click)="imagen()">
+			</ion-item>
 
 
-		<button ion-button (click)="save()">Agregar</button>
+			<button ion-button (click)="save()">Agregar</button>
 
-	</ion-list>
+		</ion-list>
 
-</ion-content>
+	</ion-content>
+</div>
