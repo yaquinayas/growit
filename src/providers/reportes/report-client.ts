@@ -23,14 +23,24 @@ export class ReportClient {
 
   }
 
-  getKinds(id: string, tipo: string){
+  getKinds(id: string, tipo: string) {
     return this.http.get(this.url + "/idfinca/" + id + "/tipo/" + tipo).map(this.processArray).catch(this.processCatch);
   }
 
   insert(reporte: Reporte) {
-        return this.http.post(this.url, reporte).map(this.process).catch(this.processCatch);
+    return this.http.post(this.url, reporte).map(this.process).catch(this.processCatch);
 
-    }
+  }
+
+  getOne(id: string){
+    return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
+  }
+  delete(id: string) {
+    return this.http.delete(this.url + "/" + id).map(this.process).catch(this.processCatch);
+  }
+  update(id: string, reporte: Reporte) {
+    return this.http.put(this.url + "/" + id, reporte).map(this.process).catch(this.processCatch);
+  }
 
   private process(res: Response) {
     let body = res.json();

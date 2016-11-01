@@ -4,15 +4,46 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<div class="background">
+	<ion-header>
+		<ion-navbar color="bar">
+			<ion-title>
+				Reportes
+			</ion-title>
+		</ion-navbar>
+	</ion-header>
 
-  <ion-navbar color="bar">
-    <ion-title>finanzas</ion-title>
-  </ion-navbar>
+	<ion-content padding class="transparent">
 
-</ion-header>
+		<ion-card *ngFor="let u of data">
+			<ion-card-content>
+				<ion-grid>
+					<ion-row>
+						<ion-col width-50 (click)="goToDetail(id = u.id )">
+							<h3><b>Tipo: </b> </h3>
+							<h3><b>Valor:</b> </h3>											
+						</ion-col>
+						<ion-col width-50 (click)="goToDetail(id = u.id )">
+							<h3>{{u.tipo}}</h3>
+							<h3>{{u.valor}}</h3>													
+						</ion-col>
+						<ion-col>
+							<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.id)"></ion-icon>
+							<br>							
+							<ion-icon color="primary" name="create" (click)="goToEdit(id = u.id)"></ion-icon>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</ion-card>
+		<ion-fab bottom center>
+			<button ion-fab color="add" (click)="goToAdd()"><ion-icon name="add"></ion-icon></button>
+		</ion-fab>
+
+		<!--<ion-thumbnail item-left>
+	<img src="img/thumbnail-puppy-1.jpg">
+</ion-thumbnail>-->
 
 
-<ion-content padding>
-
-</ion-content>
+	</ion-content>
+</div>

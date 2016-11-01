@@ -1,5 +1,5 @@
 <!--
-  Generated template for the AddReports page.
+  Generated template for the EdditReport page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
 	<ion-navbar color="bar">
-		<ion-title>Añadir un reporte</ion-title>
+		<ion-title>Editar Reporte</ion-title>
 	</ion-navbar>
 
 </ion-header>
@@ -31,7 +31,7 @@
 
 		<ion-item>
 			<ion-label floating>Comentario</ion-label>
-			<ion-input type="text"  [(ngModel)]="reporte.comentario"></ion-input>
+			<ion-input type="text" value="{{data.comentario}}" [(ngModel)]="reporte.comentario"></ion-input>
 		</ion-item>
 
 		<ion-item>

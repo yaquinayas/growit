@@ -18,19 +18,19 @@
 	<ion-list>
 		<ion-item>
 			<ion-label floating>Nombre</ion-label>
-			<ion-input type="text" value="data.nombre" [(ngModel)]="animal.nombre"></ion-input>
+			<ion-input type="text" value="{{data.nombre}}" [(ngModel)]="animal.nombre"></ion-input>
 		</ion-item>
 
 		<ion-item>
 			<ion-label floating>Raza</ion-label>
-			<ion-input type="text" value="data.raza" [(ngModel)]="animal.raza"></ion-input>
+			<ion-input type="text" value="{{data.raza}}" [(ngModel)]="animal.raza"></ion-input>
 		</ion-item>
 
 		<br>
 
 		<ion-item>
 			<ion-label>Sexo</ion-label>
-			<ion-select value="data.sexo" [(ngModel)]="animal.sexo">
+			<ion-select  [(ngModel)]="animal.sexo" [(ngModel)]="data.sexo">
 				<ion-option value="Macho">Macho</ion-option>
 				<ion-option value="Hembra">Hembra</ion-option>
 			</ion-select>
@@ -39,44 +39,46 @@
 
 		<ion-item>
 			<ion-label>Fecha de nacimiento</ion-label>
-			<ion-datetime value="nac" displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
+			<ion-datetime  displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
 		</ion-item>
 
 		<br>
 		<ion-item>
 			<ion-label>Tipo</ion-label>
-			<ion-select value="data.tipo" [(ngModel)]="animal.tipo">
+			<ion-select  [(ngModel)]="animal.tipo">
 				<ion-option value="Leche">Leche</ion-option>
 				<ion-option value="Carne">Carne</ion-option>
 			</ion-select>
 		</ion-item>
 
-		<ion-item *ngIf="animal.sexo == 'Hembra'">
+		<ion-item *ngIf="data.sexo == 'Hembra'">
 			<ion-label floating>Litros diarios</ion-label>
 			<ion-input type="number" value="data.litros_diarios" [(ngModel)]="animal.litros_diarios"></ion-input>
 		</ion-item>
 
 		<ion-item>
 			<ion-label floating>Peso</ion-label>
-			<ion-input type="number" value="data.peso" [(ngModel)]="animal.peso"></ion-input>
+			<ion-input type="number" value="{{data.peso}}" [(ngModel)]="animal.peso"></ion-input>
 		</ion-item>
 
-		<ion-item *ngIf="animal.imagen == ''">
+		<br>
+		<ion-item *ngIf="photochanged == '0'">
 			<ion-header>
 				Imagen
 			</ion-header>
 			<img src="{{data.imagen}}" (click)="imagen()">
 		</ion-item>
 
-		<ion-item *ngIf="animal.imagen != ''">
+		<ion-item *ngIf="photochanged == '1'">
 			<ion-header>
 				Imagen
 			</ion-header>
-			<img src="{{animal.imagen}}" (click)="imagen()">
+			<img src="{{finca.imagen}}" (click)="imagen()">
 		</ion-item>
 
-
-		<button ion-button (click)="save()">Agregar</button>
+		<button ion-button color="add" (click)="save()">
+    <ion-icon name="ios-share-outline"></ion-icon>
+       &nbsp; Guardar</button>
 
 	</ion-list>
 

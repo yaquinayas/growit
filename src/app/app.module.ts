@@ -19,6 +19,9 @@ import { FinanzasPage } from '../pages/finanzas/finanzas';
 import { ReportDetailPage } from '../pages/report-detail/report-detail';
 import { UserProfile } from '../pages/user-profile/user-profile';
 import { EditFinca } from '../pages/edit-finca/edit-finca';
+import { EditReport } from '../pages/edit-report/edit-report';
+import { EditAnimal } from '../pages/edit-animal/edit-animal';
+import { ReportInfo } from '../pages/report-info/report-info';
 //providers
 import { FincaClient } from '../providers/fincas/finca-client';
 import { UserClient } from '../providers/usuarios/user-client';
@@ -45,7 +48,10 @@ import { Storage } from '@ionic/Storage';
     FinanzasPage,
     ReportDetailPage,
     UserProfile,
-    EditFinca
+    EditFinca,
+    EditReport,
+    EditAnimal,
+    ReportInfo
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -69,7 +75,10 @@ import { Storage } from '@ionic/Storage';
     FinanzasPage,
     ReportDetailPage,
     UserProfile,
-    EditFinca
+    EditFinca,
+    EditReport,
+    EditAnimal,
+    ReportInfo
   ],
   providers: [
     Storage,

@@ -28,6 +28,7 @@ export class AnimalsPage {
       this.id = value;
       this.loadAnimals(this.id);
       this.event.subscribe("reloadAnimals", () => {
+        console.log("reloaded by event");
         this.loadAnimals(this.id);
       });
     });

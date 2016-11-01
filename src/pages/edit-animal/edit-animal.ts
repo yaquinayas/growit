@@ -37,6 +37,7 @@ export class EditAnimal {
       this.animal.id_finca = value;
       console.log("id finca es " + this.animal.id_finca)
     });
+    this.loadDetails(this.ida);
   }
 
   ionViewDidLoad() {
@@ -75,7 +76,7 @@ export class EditAnimal {
     let confirm;
     if (success) {
       confirm = this.alertCtrl.create({
-        title: 'Finca Editada Correctamente',
+        title: 'Animal Editado Correctamente',
         message: 'Los datos fueron ingresados',
         buttons: [
           {
@@ -92,7 +93,7 @@ export class EditAnimal {
     } else {
       confirm = this.alertCtrl.create({
         title: 'Error',
-        message: 'Hubo un problema al editar la finca',
+        message: 'Hubo un problema al editar el animal',
         buttons: [
           {
             text: 'Aceptar',

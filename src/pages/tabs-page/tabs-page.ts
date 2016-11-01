@@ -4,7 +4,7 @@ import { NavController, NavParams, Events } from 'ionic-angular';
 import { FincaDetailsPage } from '../finca-details/finca-details';
 import { AnimalsPage } from '../animales/animales';
 import { ContactPage } from '../contact/contact';
-import { AddReportsPage } from '../add-reports/add-reports';
+import { FinanzasPage } from '../finanzas/finanzas';
 /*
   Generated class for the TabsPage page.
 
@@ -22,8 +22,8 @@ export class TabsPage implements OnDestroy {
 
 
   tab1Root: any = FincaDetailsPage;
-  tab2Root: any = AnimalsPage;  
-  tab3Root: any = AddReportsPage;
+  tab2Root: any = AnimalsPage;
+  tab3Root: any = FinanzasPage;
   idf: string;
 
   constructor(public navCtrl: NavController,

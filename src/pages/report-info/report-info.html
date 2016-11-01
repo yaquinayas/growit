@@ -1,0 +1,42 @@
+<!--
+  Generated template for the ReportInfo page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="background">
+	<ion-header>
+
+		<ion-navbar color="bar">
+			<ion-title>Reporte</ion-title>
+		</ion-navbar>
+
+	</ion-header>
+
+
+	<ion-content padding class="transparent">
+
+		<ion-card>
+			<ion-card-content>
+				<ion-grid>
+					<ion-row>
+						<ion-col width-50>
+							<h3><b>Tipo: </b> </h3>
+							<h3><b>Valor:</b> </h3>
+							<h3><b>Comentario:</b></h3>
+							<h3><b>Fecha:</b></h3>
+						</ion-col>
+						<ion-col width-50>
+							<h3>{{data.tipo}}</h3>
+							<h3>{{data.valor}}</h3>
+							<h3>{{data.comentario}} </h3>
+							<h3>{{fecha}} </h3>
+						</ion-col>
+
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</ion-card>
+
+	</ion-content>
+</div>
