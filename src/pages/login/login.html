@@ -4,40 +4,34 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-	<ion-navbar>
-		<ion-title>
-			Iniciar Sesión
-		</ion-title>
-	</ion-navbar>
-</ion-header>
-
-<ion-content text-center padding>
-	<div class="page-login">
-		<img src="../assets/img/bull2.png" height="20%" width="30%" class="center">
-		<br>
-		<span class="login-header">Gegan</span>
-		<ion-card>
-			<ion-card-content>
-				<ion-item>
-					<ion-label floating>Usuario</ion-label>
-					<ion-input type="text" [(ngModel)]="usuario.usr" [(ngModel)]="user"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-label floating>Contraseña</ion-label>
-					<ion-input type="password" [(ngModel)]="usuario.pass" [(ngModel)]="pass"></ion-input>
-				</ion-item>
-				<ion-grid>
-					<ion-row>
-						<ion-col width-50>
-							<button ion-button clear full (click)="goToRegister()">Registrar</button>
-						</ion-col>
-						<ion-col width-50>
-							<button ion-button full (click)="goToHome()">Entrar</button>
-						</ion-col>
-					</ion-row>
-				</ion-grid>
-			</ion-card-content>
-		</ion-card>
-	</div>
-</ion-content>
+<div class="login-background">
+	<ion-content text-center padding class="transparent">
+		<div class="page-login">
+			<img src="../assets/img/bull2.png" height="20%" width="30%" class="center">
+			<br>
+			<span class="login-header">Gegan</span>
+			<ion-card>
+				<ion-card-content>
+					<ion-item>
+						<ion-label floating>Usuario</ion-label>
+						<ion-input type="text" [(ngModel)]="usuario.usr" [(ngModel)]="user"></ion-input>
+					</ion-item>
+					<ion-item>
+						<ion-label floating>Contraseña</ion-label>
+						<ion-input type="password" [(ngModel)]="usuario.pass" [(ngModel)]="pass"></ion-input>
+					</ion-item>
+					<ion-grid>
+						<ion-row>
+							<ion-col width-50>
+								<button ion-button clear full (click)="goToRegister()">Registrar</button>
+							</ion-col>
+							<ion-col width-50>
+								<button ion-button full (click)="goToHome()">Entrar</button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</ion-card-content>
+			</ion-card>
+		</div>
+	</ion-content>
+</div>

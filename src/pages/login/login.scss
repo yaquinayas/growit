@@ -5,11 +5,20 @@
     height: 100%;
 }
 
+.login-background{
+    background-image: url("../assets/img/DM6hvet.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
 .login-header{
-    text-shadow: 1px 1px 5px rgba(255,255,255,0.7);
-    color:deepskyblue;
+    text-shadow: 1px 1px 5px rgba(255,255,255,0.85);
+    color:#18ffff;
     font-size: 4em;
-    font-weight: 100;      
+    font-weight: 100;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;      
 }
 
 .center {
@@ -17,3 +26,5 @@
     margin-right: auto;
     display: block;
 }
+
+

@@ -24,14 +24,14 @@ export class AnimalsPage {
     private alertCtrl: AlertController
   ) {
     this.data = [];
-    this.id = ""
     Storage.get("idfinca").then((value: string) => {
       this.id = value;
       this.loadAnimals(this.id);
+      this.event.subscribe("reloadAnimals", () => {
+        this.loadAnimals(this.id);
+      });
     });
-    this.event.subscribe("reloadAnimals", () => {
-      this.loadAnimals(this.id);
-    });
+
 
 
   }
@@ -42,7 +42,10 @@ export class AnimalsPage {
 
   loadAnimals(id: string) {
     console.log("entro a cargar animales" + id);
-    this.client.getAllOfFinca(id).subscribe((res) => { this.data = res });
+    this.client.getAllOfFinca(id).subscribe((res) => { 
+      this.data = res;
+      
+     });
   }
 
   goToAnimalDetails(id: string) {
@@ -75,7 +78,7 @@ export class AnimalsPage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.event.publish("reloadAnimals");
+              this.loadAnimals(this.id);
               console.log('OK');
             }
           }
@@ -90,7 +93,7 @@ export class AnimalsPage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.event.publish("reloadAnimals");
+              this.loadAnimals(this.id);
               console.log('OK');
             }
           }
@@ -132,6 +135,7 @@ export class AnimalsPage {
   ngOnDestroy() {
     this.event.unsubscribe("reloadAnimals");
   }
+
 
 
 

@@ -1,5 +1,6 @@
+<div class="home-background">
 <ion-header>
-	<ion-navbar>
+	<ion-navbar color="bar">
 		<ion-title>
 			Fincas
 		</ion-title>
@@ -26,42 +27,43 @@
 
 <ion-nav id="nav" #content></ion-nav>
 
-<ion-content padding>
+	<ion-content padding class="transparent">
 
-	<ion-card *ngFor="let u of data">
+		<ion-card *ngFor="let u of data">
 
-		<ion-card-content>
+			<ion-card-content>
 
-			<ion-grid>
-				<!--<ion-icon class="right" name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>-->
-				<ion-row >
-					<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
-						<img class="img-finca" src="{{u.imagen}}">
-					</ion-col>
-					<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
-						<h2><b>Finca: </b> {{u.nombre}}.</h2>
-						<h2> {{u.direccion}}</h2>
-					</ion-col>
-					<ion-col>
-						<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>
-						<br>
-						<br>
-						<ion-icon color="primary" name="create" (click)="goToEdit(id = u.idfinca)"></ion-icon>
-					</ion-col>
-				</ion-row>
+				<ion-grid>
+					<!--<ion-icon class="right" name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>-->
+					<ion-row>
+						<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
+							<img class="img-finca" src="{{u.imagen}}">
+						</ion-col>
+						<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
+							<h2><b>Finca: </b> {{u.nombre}}.</h2>
+							<h2> {{u.direccion}}</h2>
+						</ion-col>
+						<ion-col>
+							<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>
+							<br>
+							<br>
+							<ion-icon color="primary" name="create" (click)="goToEdit(id = u.idfinca)"></ion-icon>
+						</ion-col>
+					</ion-row>
 
-				<!--<ion-row>
+					<!--<ion-row>
 						<ion-icon color="danger" name="close-circle"></ion-icon>
 					</ion-row>-->
-			</ion-grid>
-		</ion-card-content>
+				</ion-grid>
+			</ion-card-content>
 
-	</ion-card>
-
-
+		</ion-card>
 
 
-	<ion-fab bottom center>
-		<button ion-fab (click)="goToAddFincas()" color="secundary"><ion-icon name="add"></ion-icon></button>
-	</ion-fab>
-</ion-content>
+
+
+		<ion-fab bottom center>
+			<button ion-fab color="add" (click)="goToAddFincas()"><ion-icon name="add"></ion-icon></button>
+		</ion-fab>
+	</ion-content>
+</div>

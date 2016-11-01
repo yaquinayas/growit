@@ -1,5 +1,5 @@
 <ion-header>
-	<ion-navbar>
+	<ion-navbar color="bar">
 		<ion-title>
 			Animales
 		</ion-title>
@@ -8,7 +8,7 @@
 
 <ion-content padding>
 
-	<ion-card *ngFor="let u of data" (click)="goToAnimalDetails(id = u.id )">
+	<ion-card *ngFor="let u of data">
 		<ion-card-content>
 			<ion-grid>
 				<ion-row>
@@ -21,10 +21,10 @@
 						<h3><b>Sexo:</b>{{u.sexo}} </h3>
 					</ion-col>
 					<ion-col>
-						<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>
+						<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.id)"></ion-icon>
 						<br>
 						<br>
-						<ion-icon color="primary" name="create" (click)="goToEdit(id = u.idfinca)"></ion-icon>
+						<ion-icon color="primary" name="create" (click)="goToEdit(id = u.id)"></ion-icon>
 					</ion-col>
 
 				</ion-row>

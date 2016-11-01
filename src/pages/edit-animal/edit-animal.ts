@@ -81,7 +81,7 @@ export class EditAnimal {
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadHome");
+              this.events.publish("reloadAnimals");
               this.navCtrl.pop();
               console.log('OK');
             }
@@ -97,7 +97,7 @@ export class EditAnimal {
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadHome");
+              this.events.publish("reloadAnimals");
               this.navCtrl.pop();
               console.log('OK');
             }

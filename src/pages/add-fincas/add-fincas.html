@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-	<ion-navbar>
+	<ion-navbar color="bar">
 		<ion-title>Agregar Fincas</ion-title>
 	</ion-navbar>
 
@@ -26,7 +26,7 @@
 	</ion-item>
 
 	<ion-item *ngIf="finca.imagen == '' " >
-		<button ion-button outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
+		<button ion-button large outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
 			&nbsp;Imagen
 		</button>		 
 	</ion-item>

@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-	<ion-navbar>
+	<ion-navbar color="bar">
 		<ion-title>Añadir un animal</ion-title>
 	</ion-navbar>
 
@@ -61,7 +61,7 @@
 		</ion-item>
 
 		<ion-item *ngIf="animal.imagen == '' ">
-			<button ion-button outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
+			<button ion-button large outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
 			&nbsp;Imagen
 		</button>
 		</ion-item>

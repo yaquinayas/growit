@@ -32,19 +32,23 @@ export class HomePage {
     this.data = [];
     let idparams = params.get('idf');
     if (idparams) {
+      console.log("params");
       this.idu = idparams;
       this.loadFincas(idparams);
       this.events.subscribe("reloadHome", () => {
+        delete this.data;
         console.log("page reloaded by event");
         this.loadFincas(idparams);
       });
     } else {
+      console.log("storage");
       Storage.get("userid").then((value: string) => {
         this.idu = value;
         let id = value;
-        console.log("id es" + id);
+        console.log("id usuario es " + id);
         this.loadFincas(id);
         this.events.subscribe("reloadHome", () => {
+          delete this.data;
           console.log("page reloaded by event");
           this.loadFincas(id);
         });
@@ -68,24 +72,11 @@ export class HomePage {
     this.client.getAllOfUsr(id).subscribe(
       (res) => {
         loader.dismissAll();
-        this.data = res
+        this.data = res;
       },
-      (err) => {
-        loader.dismissAll();
-        let confirm = this.alertCtrl.create({
-          title: 'Error',
-          message: 'Hubo un problema al cargar los datos',
-          buttons: [
-            {
-              text: 'Aceptar',
-              handler: () => {
-                this.events.publish("reloadHome");
-                console.log('OK');
-              }
-            }
-          ]
-        });
-        confirm.present();
+      (err) => {       
+          loader.dismissAll();       
+        
       }
     );
   }
@@ -189,5 +180,6 @@ export class HomePage {
   ngOnDestroy() {
     this.events.unsubscribe("reloadHome");
   }
+
 
 }
