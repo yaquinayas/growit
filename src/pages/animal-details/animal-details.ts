@@ -43,9 +43,10 @@ export class AnimalDetailsPage {
       let nac2 = nac[4].split(':"');
       let nac3 = nac2[1].split('T');
       let nac4 = nac3[0].split('"');
-      this.nac = nac4[0];     
+      this.nac = nac4[0];           
 
       console.log("nac es " + nac3[0]);
+      
 
 
       console.log(JSON.stringify(this.data));

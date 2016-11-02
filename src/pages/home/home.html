@@ -29,7 +29,7 @@
 
 	<ion-content padding class="transparent">
 
-		<ion-card *ngFor="let u of data">
+		<ion-card *ngFor="let u of data" class="background-card">
 
 			<ion-card-content>
 
@@ -40,8 +40,8 @@
 							<img class="img-finca" src="{{u.imagen}}">
 						</ion-col>
 						<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
-							<h2><b>Finca: </b> {{u.nombre}}.</h2>
-							<h2> {{u.direccion}}</h2>
+							<span class="white-text">{{u.nombre}}.</span> <br>  
+						 {{u.direccion}}
 						</ion-col>
 						<ion-col>
 							<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>

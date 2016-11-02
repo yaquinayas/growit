@@ -27,8 +27,12 @@ export class AnimalsPage {
     Storage.get("idfinca").then((value: string) => {
       this.id = value;
       this.loadAnimals(this.id);
-      this.event.subscribe("reloadAnimals", () => {
-        console.log("reloaded by event");
+    });
+    this.event.subscribe("reloadAnimals", () => {
+      delete this.data;
+      console.log("reloaded by event");
+      Storage.get("idfinca").then((value: string) => {
+        this.id = value;
         this.loadAnimals(this.id);
       });
     });
@@ -43,10 +47,10 @@ export class AnimalsPage {
 
   loadAnimals(id: string) {
     console.log("entro a cargar animales" + id);
-    this.client.getAllOfFinca(id).subscribe((res) => { 
+    this.client.getAllOfFinca(id).subscribe((res) => {
       this.data = res;
-      
-     });
+
+    });
   }
 
   goToAnimalDetails(id: string) {
@@ -79,7 +83,7 @@ export class AnimalsPage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.loadAnimals(this.id);
+              this.event.publish("reloadAnimals");
               console.log('OK');
             }
           }
@@ -94,7 +98,7 @@ export class AnimalsPage {
           {
             text: 'Aceptar',
             handler: () => {
-              this.loadAnimals(this.id);
+              this.event.publish("reloadAnimals");
               console.log('OK');
             }
           }

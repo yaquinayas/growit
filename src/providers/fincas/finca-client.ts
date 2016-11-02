@@ -12,8 +12,8 @@ import { Finca } from './finca';
 
 @Injectable()
 export class FincaClient {
-    //url: string = "http://192.168.0.12:8080/fincas";
-     url: string = "http://localhost:8080/fincas";
+    url: string = "http://192.168.0.12:8080/fincas";
+     //url: string = "http://localhost:8080/fincas";
     //url: string = "http://10.0.2.2:8080/fincas";
     constructor(public http: Http) { }
 

@@ -16,30 +16,34 @@
 
 	<ion-content padding class="transparent">
 
-		<ion-item>
-			<ion-label floating>Nombre:</ion-label>
-			<ion-input type="text" [(ngModel)]="finca.nombre"></ion-input>
-		</ion-item>
+		<ion-card>
+			<ion-card-content>
+				<ion-item>
+					<ion-label floating>Nombre:</ion-label>
+					<ion-input type="text" [(ngModel)]="finca.nombre"></ion-input>
+				</ion-item>
 
-		<ion-item>
-			<ion-label floating>Dirección:</ion-label>
-			<ion-input type="text" [(ngModel)]="finca.direccion"></ion-input>
-		</ion-item>
+				<ion-item>
+					<ion-label floating>Dirección:</ion-label>
+					<ion-input type="text" [(ngModel)]="finca.direccion"></ion-input>
+				</ion-item>
+				<br>
+				<ion-item *ngIf="finca.imagen == '' ">
+					<button ion-button large class="center" color="add" outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
+						&nbsp;Imagen
+					</button>
+				</ion-item>
 
-		<ion-item *ngIf="finca.imagen == '' ">
-			<button ion-button large outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
-			&nbsp;Imagen
-		</button>
-		</ion-item>
+				<ion-item *ngIf="finca.imagen != ''">
+					<ion-header>
+						Imagen
+					</ion-header>
+					<img src="{{finca.imagen}}" (click)="imagen()">
+				</ion-item>
 
-		<ion-item *ngIf="finca.imagen != ''">
-			<ion-header>
-				Imagen
-			</ion-header>
-			<img src="{{finca.imagen}}" (click)="imagen()">
-		</ion-item>
-
-		<button ion-button (click)="save()">Agregar</button>
+			</ion-card-content>
+		</ion-card>
+		<button ion-button class="center" color="add" (click)="save()">Agregar</button>
 
 	</ion-content>
 </div>

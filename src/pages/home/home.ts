@@ -74,9 +74,9 @@ export class HomePage {
         loader.dismissAll();
         this.data = res;
       },
-      (err) => {       
-          loader.dismissAll();       
-        
+      (err) => {
+        loader.dismissAll();
+
       }
     );
   }

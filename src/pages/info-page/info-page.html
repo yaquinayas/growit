@@ -16,12 +16,15 @@
 
 	<ion-content padding class="transparent">
 
-		<h4><b>Nombre:</b> {{data.nombre}}</h4>
-		<h4><b>Dirección:</b> {{data.direccion}}</h4>
-		<h4><b>Numero de animales:</b> {{cantidad}}</h4>
-		<ion-icon name="paw">: 2</ion-icon>
-		<h4><b>Numero de machos: </b> {{machos}}</h4>
-		<h4><b>Numero de hembras: </b> {{hembras}}</h4>
+		<ion-card class="background-card">
+			<ion-card-content>
+			<b>Nombre:</b> {{data.nombre}} <br>
+			<b>Dirección:</b> {{data.direccion}} <br>
+			<b>Numero de animales:</b> {{cantidad}} <br>
+			<b>Numero de machos: </b> {{machos}} <br>
+			<b>Numero de hembras: </b> {{hembras}} <br>
+			</ion-card-content>
+		</ion-card>
 
 	</ion-content>
 </div>

@@ -7,17 +7,18 @@
 <div class="background">
 	<ion-header>
 
-		<ion-navbar>
-			<ion-title>Register</ion-title>
+		<ion-navbar color="bar">
+			<ion-title>Registro de usuario</ion-title>
 		</ion-navbar>
 
 	</ion-header>
 
 
-	<ion-content padding>
+	<ion-content padding class="transparent">
 
 		<ion-card>
-			<ion-item>
+			<ion-card-content>	
+				<ion-item>
 				<ion-label floating>Nombre</ion-label>
 				<ion-input type="text" [(ngModel)]="usuario.nombre"></ion-input>
 			</ion-item>
@@ -34,9 +35,11 @@
 				<ion-label floating>Contraseña</ion-label>
 				<ion-input type="password" [(ngModel)]="usuario.pass"></ion-input>
 			</ion-item>
+			</ion-card-content>
+			<br>
 		</ion-card>
 
-		<button ion-button (click)="save()">Agregar</button>
+		<button ion-button class="center" color="add" (click)="save()">Agregar</button>
 
 	</ion-content>
 </div>

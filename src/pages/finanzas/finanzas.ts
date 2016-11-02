@@ -31,6 +31,7 @@ export class FinanzasPage {
       this.idf = value;
       this.loadReports(this.idf);
       this.event.subscribe("ReloadReports", () => {
+        delete this.data;
         console.log("reloaded by event");
         this.loadReports(this.idf);
       });
@@ -45,14 +46,14 @@ export class FinanzasPage {
   loadReports(id: string) {
     console.log("entro a cargar Reportes " + id);
     this.client.getAllOfUsr(id).subscribe((res) => {
-      this.data = res;    
-      
+      this.data = res;
+
 
     });
   }
 
   goToDetail(id: string) {
-    this.navCtrl.push(ReportInfo,{
+    this.navCtrl.push(ReportInfo, {
       idreport: id
     })
   }
@@ -135,7 +136,7 @@ export class FinanzasPage {
     }
   }
 
-   ngOnDestroy() {
+  ngOnDestroy() {
     this.event.unsubscribe("ReloadReports");
   }
 

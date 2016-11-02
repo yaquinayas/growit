@@ -5,24 +5,26 @@
   Ionic pages and navigation.
 -->
 <div class="background">
-<ion-header>
+	<ion-header>
 
-  <ion-navbar color="bar">
-    <ion-title>Informes Financieros</ion-title>
-  </ion-navbar>
+		<ion-navbar color="bar">
+			<ion-title>Informes Financieros</ion-title>
+		</ion-navbar>
 
-</ion-header>
+	</ion-header>
 
 
-<ion-content padding class="transparent">
+	<ion-content padding class="transparent">
 
-  
-  ingresos: {{totingresos}}
-  <br>      
-  egresos: {{totegresos}}
 
-  <br>
-  total: {{total}}
+		<ion-card class="background-card">
+			<ion-card-content>
+				Ingresos: {{totingresos}}
+				<br> Egresos: {{totegresos}}
 
-</ion-content>
+				<br> Total: {{total}}
+			</ion-card-content>
+		</ion-card>
+
+	</ion-content>
 </div>
