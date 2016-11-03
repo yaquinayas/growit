@@ -37,6 +37,18 @@
 			</ion-item>
 			</ion-card-content>
 			<br>
+			<ion-item *ngIf="finca.imagen == '' ">
+					<button ion-button large class="center" outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
+						&nbsp;Imagen
+					</button>
+				</ion-item>
+
+				<ion-item *ngIf="finca.imagen != ''">
+					<ion-header>
+						Imagen
+					</ion-header>
+					<img src="{{finca.imagen}}" (click)="imagen()">
+				</ion-item>
 		</ion-card>
 
 		<button ion-button class="center" color="add" (click)="save()">Agregar</button>
