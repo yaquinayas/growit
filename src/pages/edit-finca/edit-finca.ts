@@ -32,6 +32,7 @@ export class EditFinca {
     this.photochanged = 0;
     this.id = navParams.get('idfinca');
     this.loadDetails(this.id);
+    this.finca.idfinca = parseInt(this.id);
     
   }
 
@@ -71,13 +72,20 @@ export class EditFinca {
   }
 
   save() { 
-       
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();       
     this.client.update(this.id,this.finca).subscribe(
       (res) => {
+        loader.dismissAll();
         this.processResponse(res);
 
       }
-      , (err) => this.processResponse(false));
+      , (err) => {
+        loader.dismissAll();
+        this.processResponse(false);});
   }
 
   processResponse(success: boolean) {

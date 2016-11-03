@@ -72,11 +72,18 @@ export class AnimalsPage {
   }
 
   deleteAnimal(id: string) {
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.delete(id).subscribe(
       (res) => {
+        loader.dismissAll();
         this.processResponce(res);
       },
       (err) => {
+        loader.dismissAll();
         this.processResponce(false);
       }
     );

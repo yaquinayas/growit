@@ -48,7 +48,7 @@ export class AddFincasPage {
     loader.present();
     this.fincas.insert(this.finca).subscribe(
       (res) => {
-        loader.dismissAll;
+        loader.dismissAll();
         this.processResponse(res);
 
       }

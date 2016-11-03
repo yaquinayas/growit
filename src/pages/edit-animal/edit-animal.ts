@@ -81,7 +81,7 @@ export class EditAnimal {
        
     this.client.update(this.ida,this.animal).subscribe(
       (res) => {
-        loader.dismissAll;
+        loader.dismissAll();
         this.processResponse(res);
 
       }
