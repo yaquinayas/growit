@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController} from 'ionic-angular';
+import { NavController, ToastController, LoadingController } from 'ionic-angular';
 
-import {UserClient} from '../../providers/usuarios/user-client';
-import {User} from '../../providers/usuarios/user';
+import { UserClient } from '../../providers/usuarios/user-client';
+import { User } from '../../providers/usuarios/user';
 
 
 /*
@@ -18,31 +18,38 @@ import {User} from '../../providers/usuarios/user';
 export class RegisterPage {
   usuario: User;
   constructor(public navCtrl: NavController,
-              private usrcli:UserClient,
-              private toast:ToastController) {
-                this.usuario = new User();
-              }
+    private usrcli: UserClient,
+    private toast: ToastController,
+    private loadingCtrl: LoadingController) {
+    this.usuario = new User();
+  }
 
   ionViewDidLoad() {
     console.log('Hello Register Page');
   }
 
-  save(){
+  save() {
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.usrcli.insert(this.usuario).subscribe(
-      (res)=>{
-        this.processResponse(res);        
+      (res) => {
+        loader.dismissAll();
+        this.processResponse(res);
         this.navCtrl.pop();
       }
-      , (err)=>this.processResponse(false));
+      , (err) => this.processResponse(false));
   }
 
-  processResponse(success:boolean){
+  processResponse(success: boolean) {
     let msg;
-    if(success){
-      msg = this.toast.create({message:"Exito !", duration:3000});
-      
-    }else{
-      msg = this.toast.create({message:"Error !", duration:3000});
+    if (success) {
+      msg = this.toast.create({ message: "Exito !", duration: 3000 });
+
+    } else {
+      msg = this.toast.create({ message: "Error !", duration: 3000 });
     }
     msg.present();
   }

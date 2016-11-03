@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, AlertController } from 'ionic-angular';
+import { NavController, Events, AlertController, LoadingController } from 'ionic-angular';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
 import { Camera } from 'ionic-native';
@@ -21,7 +21,8 @@ export class AddAnimalPage {
     private client: AnimalClient,
     private events: Events,
     private store: Storage,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController
   ) {
     this.animal = new Animal;
     this.animal.imagen = '';
@@ -50,13 +51,23 @@ export class AddAnimalPage {
     //let date2 = new Date("12/15/2010");
     let timeDiff = Math.abs(Date.now() - date1.getTime());
     let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    this.animal.ganancia = (this.animal.peso - this.animal.peso_al_nacer) / diffDays; 
-    
+    this.animal.ganancia = (this.animal.peso - this.animal.peso_al_nacer) / diffDays;
+
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
+
     this.client.insert(this.animal).subscribe(
       (res) => {
+        loader.dismissAll();
         this.processResponse(res);
       }
-      , (err) => this.processResponse(false));
+      , (err) => {
+        loader.dismissAll();
+        this.processResponse(false)
+      });
   }
 
   processResponse(success: boolean) {
@@ -154,6 +165,6 @@ export class AddAnimalPage {
     });
   }
 
-  
+
 
 }

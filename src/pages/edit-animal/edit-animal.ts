@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events, AlertController, NavParams } from 'ionic-angular';
+import { NavController, Events, AlertController, NavParams, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/Storage';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
@@ -27,7 +27,8 @@ export class EditAnimal {
     private events: Events,
     private store: Storage,
     private alertCtrl: AlertController,
-    private params: NavParams) {
+    private params: NavParams,
+    private loadingCtrl: LoadingController) {
     this.data = new Animal;
     this.animal = new Animal;
     this.photochanged = 0;
@@ -45,8 +46,13 @@ export class EditAnimal {
   }
 
   loadDetails(id: string) {
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.getOne(id).subscribe((res) => {
-
+      loader.dismissAll();
       this.data = res;
       let all = JSON.stringify(this.data);
       let nac = all.split(',');
@@ -63,6 +69,11 @@ export class EditAnimal {
   }
 
   save() { 
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     if (this.animal.sexo == 'Macho') {
       delete this.animal.litros_diarios;
       this.animal.litros_diarios = "No aplica";
@@ -70,10 +81,15 @@ export class EditAnimal {
        
     this.client.update(this.ida,this.animal).subscribe(
       (res) => {
+        loader.dismissAll;
         this.processResponse(res);
 
       }
-      , (err) => this.processResponse(false));
+      , (err) => {
+        loader.dismissAll();
+        this.processResponse(false);
+      }
+      );
   }
 
   processResponse(success: boolean) {

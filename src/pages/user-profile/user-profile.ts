@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { UserClient } from '../../providers/usuarios/user-client';
 import { User } from '../../providers/usuarios/user';
 
@@ -20,7 +20,8 @@ export class UserProfile {
 
   constructor(public navCtrl: NavController,
     private usrclient: UserClient,
-    private loc: Storage) {
+    private loc: Storage,
+    private loadingCtrl: LoadingController) {
     this.data = new User;
     loc.get("userid").then((value: string) => {
       let id = value;
@@ -34,8 +35,17 @@ export class UserProfile {
   }
 
   loadUser(id: string) {
+    console.log("entro");
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.usrclient.getOne(id).subscribe(
-      (res) => { this.data = res });
+      (res) => { 
+        loader.dismissAll();  
+        this.data = res;
+       });
   }
 
 

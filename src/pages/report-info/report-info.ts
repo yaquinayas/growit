@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams, AlertController } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 import { ReportClient } from '../../providers/reportes/report-client';
 import { Reporte } from '../../providers/reportes/reporte';
@@ -24,7 +24,8 @@ export class ReportInfo {
     private store: Storage,
     private alertCtrl: AlertController,
     private events: Events,
-    private params: NavParams) {
+    private params: NavParams,
+    private loadingCtrl: LoadingController) {
       this.data = new Reporte;
       this.idreport = params.get("idreport");
       this.load();
@@ -36,7 +37,14 @@ export class ReportInfo {
   }
 
   load(){
+    console.log("entro");
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.getOne(this.idreport).subscribe((res) =>{
+      loader.dismissAll();
       this.data = res;
       let all = JSON.stringify(this.data.fecha);
       let nac = all.split('T');

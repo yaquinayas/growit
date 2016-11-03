@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, NavParams, Events } from 'ionic-angular';
+import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
 
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
@@ -31,7 +31,8 @@ export class InfoPage {
     private animales: AnimalClient,
     private store: Storage,
     private params: NavParams,
-    private event: Events) {
+    private event: Events,
+    private loadingCtrl: LoadingController) {
     this.data = new Finca;
     this.animal = [];
 
@@ -68,7 +69,15 @@ export class InfoPage {
   }
 
   loadDetails(id: string) {
-    this.client.getOne(id).subscribe((res) => { this.data = res });
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
+    this.client.getOne(id).subscribe((res) => { 
+      loader.dismissAll();
+      this.data = res;
+     });
   }
 
   NumberOfAnimals(id: string) {

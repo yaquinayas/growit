@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
 
@@ -22,7 +22,8 @@ export class AnimalDetailsPage {
 
   constructor(public navCtrl: NavController,
     private params: NavParams,
-    private client: AnimalClient) {
+    private client: AnimalClient,
+    private loadingCtrl: LoadingController) {
     this.data = new Animal;
     let ida = params.get('ida');
     this.loadDetails(ida);
@@ -35,8 +36,13 @@ export class AnimalDetailsPage {
   }
 
   loadDetails(id: string) {
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.getOne(id).subscribe((res) => {
-
+      loader.dismissAll();
       this.data = res;
       let all = JSON.stringify(this.data.nacimiento);
       let nac = all.split('T');

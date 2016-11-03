@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams, AlertController } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 import { ReportClient } from '../../providers/reportes/report-client';
 import { Reporte } from '../../providers/reportes/reporte';
@@ -24,7 +24,8 @@ export class AddReportsPage {
     private store: Storage,
     private alertCtrl: AlertController,
     private events: Events,
-    private params: NavParams) {
+    private params: NavParams,
+    private loadingCtrl: LoadingController) {
     this.reporte = new Reporte();
     store.get("idfinca").then((value: number) => {
       this.reporte.id_finca = value;
@@ -40,12 +41,21 @@ export class AddReportsPage {
   }
 
   save() {
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.insert(this.reporte).subscribe(
       (res) => {
+        loader.dismissAll();
         this.processResponse(res);
 
       }
-      , (err) => this.processResponse(false)
+      , (err) => {
+        loader.dismissAll();
+        this.processResponse(false);
+      }
     );
   }
 

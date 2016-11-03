@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, NavParams, Events, ToastController } from 'ionic-angular';
+import { NavController, NavParams, Events, ToastController, LoadingController } from 'ionic-angular';
 
 import { ReportClient } from '../../providers/reportes/report-client';
 import { Reporte } from '../../providers/reportes/reporte';
@@ -29,7 +29,8 @@ export class ReportDetailPage {
     private store: Storage,
     private toast: ToastController,
     private events: Events,
-    private params: NavParams) {
+    private params: NavParams,
+    private loadingCtrl: LoadingController) {
     this.data = [];
     this.id = params.get('idf');
     this.totingresos = 0;
@@ -75,7 +76,15 @@ export class ReportDetailPage {
 
 
   getAll(id: string) {
-    this.client.getAllOfUsr(id).subscribe((res) => { this.data = res });
+    console.log("entro");
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
+    this.client.getAllOfUsr(id).subscribe((res) => { 
+      loader.dismissAll();
+      this.data = res; });
   }
 
 

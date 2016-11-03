@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, AlertController } from 'ionic-angular';
+import { NavController, Events, AlertController, LoadingController } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { Animal } from '../../providers/animales/animal';
@@ -21,7 +21,8 @@ export class AnimalsPage {
     private event: Events,
     private client: AnimalClient,
     private Storage: Storage,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController
   ) {
     this.data = [];
     Storage.get("idfinca").then((value: string) => {
@@ -46,8 +47,15 @@ export class AnimalsPage {
   }
 
   loadAnimals(id: string) {
+    console.log("entro");
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     console.log("entro a cargar animales" + id);
     this.client.getAllOfFinca(id).subscribe((res) => {
+      loader.dismissAll();
       this.data = res;
 
     });
