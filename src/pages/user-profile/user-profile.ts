@@ -16,12 +16,12 @@ import { Storage } from '@ionic/Storage';
   templateUrl: 'user-profile.html'
 })
 export class UserProfile {
-  data: User[];
+  data: User;
 
   constructor(public navCtrl: NavController,
     private usrclient: UserClient,
     private loc: Storage) {
-    this.data = [];
+    this.data = new User;
     loc.get("userid").then((value: string) => {
       let id = value;
       console.log("id es " + id);

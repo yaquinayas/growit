@@ -17,13 +17,13 @@ import { AnimalClient } from '../../providers/animales/animal-client';
   templateUrl: 'animal-details.html'
 })
 export class AnimalDetailsPage {
-  data: Animal[];
+  data: Animal;
   nac: string;
 
   constructor(public navCtrl: NavController,
     private params: NavParams,
     private client: AnimalClient) {
-    this.data = [];
+    this.data = new Animal;
     let ida = params.get('ida');
     this.loadDetails(ida);
 
@@ -38,18 +38,15 @@ export class AnimalDetailsPage {
     this.client.getOne(id).subscribe((res) => {
 
       this.data = res;
-      let all = JSON.stringify(this.data);
-      let nac = all.split(',');
-      let nac2 = nac[4].split(':"');
-      let nac3 = nac2[1].split('T');
-      let nac4 = nac3[0].split('"');
-      this.nac = nac4[0];           
-
-      console.log("nac es " + nac3[0]);
+      let all = JSON.stringify(this.data.nacimiento);
+      let nac = all.split('T');
+      let nac2 = nac[0].split('"');
+      let nac3 = nac2[1];
+      this.nac = nac3;
+      
       
 
-
-      console.log(JSON.stringify(this.data));
+      //console.log(JSON.stringify(this.data));
     });
   }
 

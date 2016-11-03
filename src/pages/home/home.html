@@ -13,7 +13,7 @@
 			<ion-title>Herramientas</ion-title>
 		</ion-toolbar>
 	</ion-header>
-	<ion-content color="add">
+	<ion-content>
 		<ion-list>
 			<button ion-item (click)="goToProfile()">
         Ver Perfil
@@ -29,7 +29,8 @@
 
 	<ion-content padding class="transparent">
 
-		<ion-card *ngFor="let u of data" class="background-card">
+		
+		<ion-card *ngFor="let u of data" class="background-card" (swipe)="confirmation(id = u.idfinca)">
 
 			<ion-card-content>
 
@@ -58,6 +59,8 @@
 			</ion-card-content>
 
 		</ion-card>
+
+	
 
 
 

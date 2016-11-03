@@ -11,7 +11,7 @@ import { Reporte } from './reporte';
 */
 @Injectable()
 export class ReportClient {
-  url: string = "http://192.168.0.12:8080/reportes";
+  url: string = "http://192.168.137.1:8080/reportes";
   //url: string = "http://10.0.2.2:8080/reportes";
   //url: string = "http://localhost:8080/reportes";
   constructor(public http: Http) {
@@ -32,7 +32,7 @@ export class ReportClient {
 
   }
 
-  getOne(id: string){
+  getOne(id: string):Observable<Reporte>{
     return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
   }
   delete(id: string) {

@@ -12,7 +12,7 @@ import { Animal } from './animal';
 @Injectable()
 export class AnimalClient {
 
-    url: string = "http://192.168.0.12:8080/animales";
+    url: string = "http://192.168.137.1:8080/animales";
      //url: string = "http://localhost:8080/animales";
     //url: string = "http://10.0.2.2:8080/animales";
     constructor(public http: Http) { }
@@ -31,7 +31,7 @@ export class AnimalClient {
         return this.http.get(this.url + "/idfinca/" + id + "/sexo/" + sexo).map(this.processArray).catch(this.processCatch);
     }
 
-    getOne(id: string): Observable<Animal[]> {
+    getOne(id: string): Observable<Animal> {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
 

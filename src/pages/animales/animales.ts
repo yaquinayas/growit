@@ -84,6 +84,7 @@ export class AnimalsPage {
             text: 'Aceptar',
             handler: () => {
               this.event.publish("reloadAnimals");
+              this.event.publish("reloadInfo");
               console.log('OK');
             }
           }
@@ -99,6 +100,7 @@ export class AnimalsPage {
             text: 'Aceptar',
             handler: () => {
               this.event.publish("reloadAnimals");
+              this.event.publish("reloadInfo");
               console.log('OK');
             }
           }

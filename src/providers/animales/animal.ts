@@ -8,6 +8,8 @@ export class Animal {
   tipo: string;
   peso: number;
   litros_diarios: string;
-  id_finca: number;  
+  id_finca: number; 
+  peso_al_nacer: number; 
+  ganancia: number;
 
 }

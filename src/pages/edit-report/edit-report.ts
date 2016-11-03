@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams, AlertController } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 import { ReportClient } from '../../providers/reportes/report-client';
 import { Reporte } from '../../providers/reportes/reporte';
@@ -17,15 +17,16 @@ import { Reporte } from '../../providers/reportes/reporte';
 })
 export class EditReport {
   reporte: Reporte;
-  data: Reporte[];
+  data: Reporte;
   idreporte: string;
   constructor(public navCtrl: NavController,
     private client: ReportClient,
     private store: Storage,
     private alertCtrl: AlertController,
     private events: Events,
-    private params: NavParams) {
-    this.data = [];
+    private params: NavParams,
+    private loadingCtrl: LoadingController) {
+    this.data = new Reporte();
     this.idreporte = params.get("idreporte");
     this.reporte = new Reporte();
     store.get("idfinca").then((value: number) => {
@@ -46,13 +47,21 @@ export class EditReport {
     });
   }
 
-  save(id: string) {
-    this.client.update(id, this.reporte).subscribe(
+  save() {
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
+    this.client.update(this.idreporte, this.reporte).subscribe(
       (res) => {
+        loader.dismissAll();
         this.processResponse(res);
 
       }
-      , (err) => this.processResponse(false)
+      , (err) => {
+        loader.dismissAll();
+        this.processResponse(false);}
     );
   }
 
@@ -61,6 +70,7 @@ export class EditReport {
     if (success) {
       confirm = this.alertCtrl.create({
         title: 'Reporte modificado Correctamente',
+        enableBackdropDismiss: false,
         message: 'Los datos fueron ingresados sin errores',
         buttons: [
           {
@@ -79,6 +89,7 @@ export class EditReport {
       confirm = this.alertCtrl.create({
         title: 'Error',
         message: 'Hubo un problema al modificar el reporte',
+        enableBackdropDismiss: false,
         buttons: [
           {
             text: 'Aceptar',
@@ -92,7 +103,7 @@ export class EditReport {
           {
             text: 'Volver a intentar',
             handler: () => {
-              this.save(this.idreporte);
+              this.save();
               console.log('volver a intentar');
             }
           }

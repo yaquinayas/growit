@@ -19,17 +19,24 @@
 			<ion-card-content>
 				<ion-grid>
 					<ion-row>
-						<ion-col width-50 (click)="goToDetail(id = u.id )">
-							<b>Tipo: </b> <br>
-							<b>Valor:</b> <br>											
-						</ion-col>
-						<ion-col width-50 (click)="goToDetail(id = u.id )">
-							{{u.tipo}}<br>
-							{{u.valor}}<br>													
+						<ion-col width-50 (click)="goToDetail(id = u.id )" class="text-right">
+							<b>Tipo: </b>																	
+						</ion-col>						
+						<ion-col width-50 (click)="goToDetail(id = u.id )" class="{{u.tipo}}">
+							{{u.tipo}}																			
 						</ion-col>
 						<ion-col>
-							<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.id)"></ion-icon>
-							<br>							
+							<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.id)"></ion-icon>						
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Valor:
+						</ion-col>
+						<ion-col width-50>
+							{{u.valor}}
+						</ion-col>
+						<ion-col>
 							<ion-icon color="primary" name="create" (click)="goToEdit(id = u.id)"></ion-icon>
 						</ion-col>
 					</ion-row>

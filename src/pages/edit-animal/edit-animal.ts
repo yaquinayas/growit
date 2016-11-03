@@ -18,7 +18,7 @@ import { Camera } from 'ionic-native';
 })
 export class EditAnimal {
   animal: Animal;
-  data: Animal[];
+  data: Animal;
   nac: string;
   photochanged: number;
   ida: string;
@@ -28,7 +28,7 @@ export class EditAnimal {
     private store: Storage,
     private alertCtrl: AlertController,
     private params: NavParams) {
-    this.data = [];
+    this.data = new Animal;
     this.animal = new Animal;
     this.photochanged = 0;
     let param = params.get('ida');
@@ -63,6 +63,10 @@ export class EditAnimal {
   }
 
   save() { 
+    if (this.animal.sexo == 'Macho') {
+      delete this.animal.litros_diarios;
+      this.animal.litros_diarios = "No aplica";
+    }
        
     this.client.update(this.ida,this.animal).subscribe(
       (res) => {

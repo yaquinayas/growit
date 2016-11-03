@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, NavParams, AlertController, MenuController } from 'ionic-angular';
+import { NavController, Events, NavParams, AlertController, MenuController, LoadingController } from 'ionic-angular';
 
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
@@ -21,7 +21,7 @@ import { ReportDetailPage } from '../report-detail/report-detail';
   templateUrl: 'finca-details.html'
 })
 export class FincaDetailsPage {
-  data: Finca[];
+  data: Finca;
   id: string;
 
   constructor(public navCtrl: NavController,
@@ -30,10 +30,11 @@ export class FincaDetailsPage {
     private event: Events,
     private navParams: NavParams,
     private alertCtrl: AlertController,
-    private menuCtrl: MenuController) {
+    private menuCtrl: MenuController,
+    private loadingCtrl: LoadingController) {
 
     
-    this.data = [];
+    this.data = new Finca;
     this.id = navParams.get('id');
     this.loadDetails(this.id);
 
@@ -49,10 +50,17 @@ export class FincaDetailsPage {
 
   loadDetails(id: string) {
     console.log("entro");
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.getOne(id).subscribe((res) => {
-      this.data = res
+      loader.dismissAll();
+      this.data = res;
     },
       (err) => {
+        loader.dismissAll();
         let confirm = this.alertCtrl.create({
           title: 'Error',
           message: 'Hubo un problema al cargar los datos',

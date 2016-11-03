@@ -16,7 +16,7 @@ import { Reporte } from '../../providers/reportes/reporte';
   templateUrl: 'report-info.html'
 })
 export class ReportInfo {
-  data: Reporte[];
+  data: Reporte;
   idreport: string;
   fecha: string;
   constructor(public navCtrl: NavController,
@@ -25,7 +25,7 @@ export class ReportInfo {
     private alertCtrl: AlertController,
     private events: Events,
     private params: NavParams) {
-      this.data = [];
+      this.data = new Reporte;
       this.idreport = params.get("idreport");
       this.load();
       
@@ -38,12 +38,11 @@ export class ReportInfo {
   load(){
     this.client.getOne(this.idreport).subscribe((res) =>{
       this.data = res;
-      let all = JSON.stringify(this.data);
-      let nac = all.split(',');
-      let nac2 = nac[4].split(':"');
-      let nac3 = nac2[1].split('T');
-      let nac4 = nac3[0].split('"');
-      this.fecha = nac4[0];  
+      let all = JSON.stringify(this.data.fecha);
+      let nac = all.split('T');
+      let nac2 = nac[0].split('"');
+      let nac3 = nac2[1];
+      this.fecha = nac3;
     })
   }
 

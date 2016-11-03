@@ -22,13 +22,80 @@
 		<br>
 		<ion-card class="background-card">
 			<ion-card-content>
-				<b>Nombre:</b> {{data.nombre}}<br>
-				<b>Raza:</b> {{data.raza}}<br>
-				<b>Sexo:</b> {{data.sexo}}<br>
-				<b>Nacimiento:</b > {{nac}}<br>      
-      <b>Tipo:</b> {{data.tipo}}<br>
-				<b>Peso:</b> {{data.peso}}<br>
-				<b>Litros diarios:</b> {{data.litros_diarios}}<br>
+				<ion-grid>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							<b>Nombre:</b>
+						</ion-col>
+						<ion-col width-50>
+							{{data.nombre}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							<b>Raza:</b>
+						</ion-col>
+						<ion-col width-50>
+							{{data.raza}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Sexo:
+						</ion-col>
+						<ion-col width-50>
+							{{data.sexo}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Nacimiento:
+						</ion-col>
+						<ion-col width-50>
+							{{nac}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Peso al nacer:
+						</ion-col>
+						<ion-col width-50>
+							{{data.peso_al_nacer}}Kg.
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Peso actual:
+						</ion-col>
+						<ion-col width-50>
+							{{data.peso}}Kg.
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Peso al nacer:
+						</ion-col>
+						<ion-col width-50>
+							{{data.peso_al_nacer}} Kg.
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Ganancia Aprox:
+						</ion-col>
+						<ion-col width-50>
+							{{data.ganancia}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							Litros diarios:
+						</ion-col>
+						<ion-col width-50>
+							{{data.litros_diarios}}
+						</ion-col>
+					</ion-row>
+				</ion-grid>				
 			</ion-card-content>
 		</ion-card>
 

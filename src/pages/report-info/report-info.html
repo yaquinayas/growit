@@ -20,19 +20,36 @@
 			<ion-card-content>
 				<ion-grid>
 					<ion-row>
-						<ion-col width-50>
-						<b>Tipo: </b> <br>
-						<b>Valor:</b> <br>
-						<b>Comentario:</b> <br>
-						<b>Fecha:</b><br>
+						<ion-col width-50 class="text-right">
+							<b>Tipo: </b>
 						</ion-col>
 						<ion-col width-50>
-						{{data.tipo}} <br>
-						{{data.valor}} <br>
-						{{data.comentario}} <br>
-						{{fecha}} <br>
+							{{data.tipo}}
 						</ion-col>
-
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							<b>Valor:</b>
+						</ion-col>
+						<ion-col width-50>
+							{{data.valor}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							<b>Comentario:</b>
+						</ion-col>
+						<ion-col width-50>
+							{{data.comentario}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col width-50 class="text-right">
+							<b>Fecha:</b>
+						</ion-col>
+						<ion-col width-50>
+							{{fecha}}
+						</ion-col>
 					</ion-row>
 				</ion-grid>
 			</ion-card-content>

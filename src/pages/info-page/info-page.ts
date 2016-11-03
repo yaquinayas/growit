@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
@@ -19,18 +19,20 @@ import { AnimalClient } from '../../providers/animales/animal-client';
   templateUrl: 'info-page.html'
 })
 export class InfoPage {
-  data: Finca[];
+  data: Finca;
   animal: Animal[];
   cantidad: number;
   machos: number;
   hembras: number;
   id: string;
+  litros: number;
   constructor(public navCtrl: NavController,
     private client: FincaClient,
     private animales: AnimalClient,
     private store: Storage,
-    private params: NavParams) {
-    this.data = [];
+    private params: NavParams,
+    private event: Events) {
+    this.data = new Finca;
     this.animal = [];
 
     this.id = params.get('idf');
@@ -38,16 +40,26 @@ export class InfoPage {
     this.NumberOfAnimals(this.id);
     this.Genders(this.id, 'Macho');
     this.Genders(this.id, 'Hembra');
-    if (this.machos == null){
+    if (this.machos == null) {
       this.machos = 0;
     }
-    if (this.hembras == null){
+    if (this.hembras == null) {
       this.hembras = 0;
     }
-    if (this.cantidad == null){
-      this.cantidad = 0;
-    }
-    
+    this.event.subscribe("reloadInfo", () => {
+      this.loadDetails(this.id);
+      this.NumberOfAnimals(this.id);
+      this.Genders(this.id, 'Macho');
+      this.Genders(this.id, 'Hembra');
+      if (this.machos == null) {
+        this.machos = 0;
+      }
+      if (this.hembras == null) {
+        this.hembras = 0;
+      }
+    });
+
+
 
   }
 
@@ -65,6 +77,9 @@ export class InfoPage {
       this.cantidad = res.length;
       console.log(this.cantidad);
     });
+    if (this.cantidad == null) {
+      this.cantidad = 0;
+    }
   }
 
   Genders(id: string, sexo: string) {
@@ -73,6 +88,13 @@ export class InfoPage {
         this.machos = res.length;
       } else {
         this.hembras = res.length;
+        let u: any;
+        this.litros = 0;        
+        for (u of res) {
+         this.litros = this.litros + parseInt(u.litros_diarios);
+        console.log("parseInt ", parseInt(u.litros_diarios));
+        console.log("litros ", this.litros)
+        }
       }
     });
 

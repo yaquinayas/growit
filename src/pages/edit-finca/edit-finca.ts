@@ -16,7 +16,7 @@ import { Camera } from 'ionic-native';
   templateUrl: 'edit-finca.html'
 })
 export class EditFinca {
-  data: Finca[];
+  data: Finca;
   finca: Finca;
   id: string;
   photochanged: number;
@@ -26,7 +26,7 @@ export class EditFinca {
     private store: Storage,
     private alertCtrl: AlertController,
     private navParams: NavParams) {
-    this.data = [];
+    this.data = new Finca;
     this.finca = new Finca;   
     this.photochanged = 0;
     this.id = navParams.get('idfinca');

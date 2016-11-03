@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, Events, AlertController } from 'ionic-angular';
+import { NavController, Events, AlertController, LoadingController } from 'ionic-angular';
 import { AddReportsPage } from '../add-reports/add-reports';
 import { EditReport } from '../edit-report/edit-report';
 import { ReportClient } from '../../providers/reportes/report-client';
@@ -25,7 +25,8 @@ export class FinanzasPage {
     private event: Events,
     private client: ReportClient,
     private Storage: Storage,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController) {
     this.data = [];
     Storage.get("idfinca").then((value: string) => {
       this.idf = value;
@@ -44,11 +45,15 @@ export class FinanzasPage {
   }
 
   loadReports(id: string) {
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     console.log("entro a cargar Reportes " + id);
     this.client.getAllOfUsr(id).subscribe((res) => {
+      loader.dismissAll();
       this.data = res;
-
-
     });
   }
 
@@ -72,6 +77,7 @@ export class FinanzasPage {
     let confirm = this.alertCtrl.create({
       title: 'Confirmación',
       message: '¿Esta seguro quiere eliminar el reporte?',
+      enableBackdropDismiss: false,
       buttons: [
         {
           text: 'Aceptar',
@@ -106,6 +112,7 @@ export class FinanzasPage {
       let confirm = this.alertCtrl.create({
         title: 'Reporte eliminado',
         message: 'El Reporte fue eliminado correctamente',
+        enableBackdropDismiss: false,
         buttons: [
           {
             text: 'Aceptar',
@@ -121,6 +128,7 @@ export class FinanzasPage {
       let confirm = this.alertCtrl.create({
         title: 'Error',
         message: 'Hubo un problema al eliminar',
+        enableBackdropDismiss: false,
         buttons: [
           {
             text: 'Aceptar',

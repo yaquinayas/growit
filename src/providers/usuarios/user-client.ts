@@ -12,7 +12,7 @@ import { User } from './user';
 
 @Injectable()
 export class UserClient {
-    url: string = "http://192.168.0.12:8080/usuarios";
+    url: string = "http://192.168.137.1:8080/usuarios";
     // url: string = "http://localhost:8080/usuarios";
     //url: string = "http://10.0.2.2:8080/usuarios";
     constructor(public http: Http) { }
@@ -25,7 +25,7 @@ export class UserClient {
 
     }
 
-    getOne(id: string): Observable<User[]> {
+    getOne(id: string): Observable<User> {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
     private process(res: Response) {
