@@ -22,6 +22,7 @@ import { EditFinca } from '../pages/edit-finca/edit-finca';
 import { EditReport } from '../pages/edit-report/edit-report';
 import { EditAnimal } from '../pages/edit-animal/edit-animal';
 import { ReportInfo } from '../pages/report-info/report-info';
+import { EditUser } from '../pages/edit-user/edit-user';
 //providers
 import { FincaClient } from '../providers/fincas/finca-client';
 import { UserClient } from '../providers/usuarios/user-client';
@@ -51,7 +52,8 @@ import { Storage } from '@ionic/Storage';
     EditFinca,
     EditReport,
     EditAnimal,
-    ReportInfo
+    ReportInfo,
+    EditUser
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -78,7 +80,8 @@ import { Storage } from '@ionic/Storage';
     EditFinca,
     EditReport,
     EditAnimal,
-    ReportInfo
+    ReportInfo,
+    EditUser
   ],
   providers: [
     Storage,

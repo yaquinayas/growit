@@ -15,7 +15,10 @@
 
 
 	<ion-content padding class="transparent">
-
+		<ion-card>
+			<img src="{{data.imagen}}" width="50%" height="50%">
+		</ion-card>
+		<br>
 		<ion-card class="background-card">
 			<ion-card-content class="background-card">
 				<b>Nombre:</b> {{data.nombre}}
@@ -24,6 +27,11 @@
 				<br> <b>Usuario:</b> {{data.usr}}
 			</ion-card-content>
 		</ion-card>
+
+		<button ion-button class="center" color="add" (click)="goToEdit()">
+			 <ion-icon name="create"></ion-icon>
+			Editar datos
+		</button>
 
 	</ion-content>
 </div>

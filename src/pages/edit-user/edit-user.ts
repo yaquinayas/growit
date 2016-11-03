@@ -1,108 +1,109 @@
 import { Component } from '@angular/core';
-import { NavController, Events, AlertController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, Events, AlertController, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/Storage';
-import { Animal } from '../../providers/animales/animal';
-import { AnimalClient } from '../../providers/animales/animal-client';
+import { UserClient } from '../../providers/usuarios/user-client';
+import { User } from '../../providers/usuarios/user';
 import { Camera } from 'ionic-native';
 
-
 /*
-  Generated class for the EditAnimal page.
+  Generated class for the EditUser page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-edit-animal',
-  templateUrl: 'edit-animal.html'
+  selector: 'page-edit-user',
+  templateUrl: 'edit-user.html'
 })
-export class EditAnimal {
-  animal: Animal;
-  data: Animal;
-  nac: string;
+export class EditUser {
+  data: User;
+  usuario: User;
+  oldpass: string;
+  id: string;
   photochanged: number;
-  ida: string;
+  
+
   constructor(public navCtrl: NavController,
-    private client: AnimalClient,
     private events: Events,
     private store: Storage,
     private alertCtrl: AlertController,
-    private params: NavParams,
-    private loadingCtrl: LoadingController) {
-    this.data = new Animal;
-    this.animal = new Animal;
-    this.photochanged = 0;
-    let param = params.get('ida');
-    this.ida = param;
-    store.get("idfinca").then((value: number) => {
-      this.animal.id_finca = value;
-      console.log("id finca es " + this.animal.id_finca)
-    });
-    this.loadDetails(this.ida);
-  }
+    private loadingCtrl: LoadingController,
+    private client: UserClient) { 
+      this.data = new User();
+      this.usuario = new User();
+      this.photochanged = 0;
+      store.get("userid").then((value: string) =>{
+        this.usuario.id = parseInt(value);
+        this.id = value;
+        this.loadUser(this.id)
+      });
+
+    }
 
   ionViewDidLoad() {
-    console.log('Hello EditAnimal Page');
+    console.log('Hello EditUser Page');
   }
 
-  loadDetails(id: string) {
+  loadUser(id: string) {
+    console.log("entro");
     let loader = this.loadingCtrl.create({
       content: "Cargando",
       duration: 100000000000000
     });
     loader.present();
-    this.client.getOne(id).subscribe((res) => {
-      loader.dismissAll();
-      this.data = res;
-      let all = JSON.stringify(this.data);
-      let nac = all.split(',');
-      let nac2 = nac[4].split(':"');
-      let nac3 = nac2[1].split('T');
-      let nac4 = nac3[0].split('"');
-      this.nac = nac4[0];     
-
-      console.log("nac es " + nac3[0]);
-
-
-      console.log(JSON.stringify(this.data));
-    });
+    this.client.getOne(id).subscribe(
+      (res) => { 
+        loader.dismissAll();  
+        this.data = res;
+       });
   }
 
-  save() { 
-    let loader = this.loadingCtrl.create({
+  save() {
+    if(this.oldpass == this.data.pass){
+      let loader = this.loadingCtrl.create({
       content: "Cargando",
       duration: 100000000000000
     });
     loader.present();
-    if (this.animal.sexo == 'Macho') {
-      delete this.animal.litros_diarios;
-      this.animal.litros_diarios = "No aplica";
-    }
-       
-    this.client.update(this.ida,this.animal).subscribe(
+    this.client.update(this.id,this.usuario).subscribe(
       (res) => {
         loader.dismissAll();
-        this.processResponse(res);
-
+        this.processResponse(res);        
       }
-      , (err) => {
-        loader.dismissAll();
-        this.processResponse(false);
-      }
-      );
+      , (err) => this.processResponse(false));
+  }else{  
+    let confirm;
+    confirm = this.alertCtrl.create({
+        title: 'Datos incorrectos',
+        message: 'La contraseña anterior es incorrecta',
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {              
+              console.log('OK');
+            }
+          }
+        ]
+      });
+      confirm.present();
   }
+  
+    }
+    
 
   processResponse(success: boolean) {
     let confirm;
     if (success) {
       confirm = this.alertCtrl.create({
-        title: 'Animal Editado Correctamente',
-        message: 'Los datos fueron ingresados',
+        title: 'Edición exitosa',
+        message: 'Los datos fueron modificados sin errores',
+        enableBackdropDismiss: false,
         buttons: [
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadAnimals");
+              this.events.publish("reloaduser");              
               this.navCtrl.pop();
               console.log('OK');
             }
@@ -113,12 +114,13 @@ export class EditAnimal {
     } else {
       confirm = this.alertCtrl.create({
         title: 'Error',
-        message: 'Hubo un problema al editar el animal',
+        message: 'Hubo un problema al modificar los datos',
+        enableBackdropDismiss: false,
         buttons: [
           {
             text: 'Aceptar',
             handler: () => {
-              this.events.publish("reloadAnimals");
+              this.events.publish("reloaduser");              
               this.navCtrl.pop();
               console.log('OK');
             }
@@ -136,8 +138,7 @@ export class EditAnimal {
     confirm.present();
   }
 
-
-  imagen() {
+   imagen() {
     let confirm = this.alertCtrl.create({
       title: 'Insertar imagen',
       message: 'Selecciona una imagen para subirla o tomala ahora ',
@@ -167,9 +168,9 @@ export class EditAnimal {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.animal.imagen = base64Image;
+      this.usuario.imagen = base64Image;
       this.photochanged = 1;
-      
+      console.log(this.usuario.imagen);
     }, (err) => {
       // Handle error
     });
@@ -180,14 +181,12 @@ export class EditAnimal {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.animal.imagen = base64Image;
+      this.usuario.imagen = base64Image;
       this.photochanged = 1;
-      
+      console.log(this.usuario.imagen);
     }, (err) => {
       // Handle error
     });
   }
-
-
 
 }

@@ -27,13 +27,14 @@ export class EditFinca {
     private alertCtrl: AlertController,
     private navParams: NavParams,
     private loadingCtrl: LoadingController) {
-    this.data = new Finca;
-    this.finca = new Finca;   
-    this.photochanged = 0;
-    this.id = navParams.get('idfinca');
-    this.loadDetails(this.id);
-    this.finca.idfinca = parseInt(this.id);
-    
+
+      this.data = new Finca;
+      this.finca = new Finca;   
+      this.photochanged = 0;
+      this.id = navParams.get('idfinca');
+      this.loadDetails(this.id);
+      this.finca.idfinca = parseInt(this.id);
+      
   }
 
   loadDetails(id: string) {
@@ -94,6 +95,7 @@ export class EditFinca {
       confirm = this.alertCtrl.create({
         title: 'Finca Editada Correctamente',
         message: 'Los datos fueron ingresados',
+        enableBackdropDismiss: false,
         buttons: [
           {
             text: 'Aceptar',
@@ -110,6 +112,7 @@ export class EditFinca {
       confirm = this.alertCtrl.create({
         title: 'Error',
         message: 'Hubo un problema al editar la finca',
+        enableBackdropDismiss: false,
         buttons: [
           {
             text: 'Aceptar',

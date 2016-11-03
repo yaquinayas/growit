@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, Events } from 'ionic-angular';
 import { UserClient } from '../../providers/usuarios/user-client';
 import { User } from '../../providers/usuarios/user';
 
 import { Storage } from '@ionic/Storage';
+
+import { EditUser } from '../edit-user/edit-user';
 
 /*
   Generated class for the UserProfile page.
@@ -21,12 +23,22 @@ export class UserProfile {
   constructor(public navCtrl: NavController,
     private usrclient: UserClient,
     private loc: Storage,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private event: Events) {
+
     this.data = new User;
     loc.get("userid").then((value: string) => {
       let id = value;
       console.log("id es " + id);
       this.loadUser(id);
+    });
+    event.subscribe("reloaduser", () => {
+      this.data = new User;
+      loc.get("userid").then((value: string) => {
+        let id = value;
+        console.log("id es " + id);
+        this.loadUser(id);
+      });
     });
   }
 
@@ -42,11 +54,14 @@ export class UserProfile {
     });
     loader.present();
     this.usrclient.getOne(id).subscribe(
-      (res) => { 
-        loader.dismissAll();  
+      (res) => {
+        loader.dismissAll();
         this.data = res;
-       });
+      });
   }
 
+  goToEdit(){
+    this.navCtrl.push(EditUser);
+  }
 
 }

@@ -1,0 +1,67 @@
+<!--
+  Generated template for the EditUser page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="background">
+  <ion-header>
+
+    <ion-navbar>
+      <ion-title>Editar Perfil</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content padding class="transparent">
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Nombre</ion-label>
+          <ion-input type="text" value="{{data.nombre}}" [(ngModel)]="usuario.nombre"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Cedula</ion-label>
+          <ion-input type="text" value="{{data.cedula}}" [(ngModel)]="usuario.cedula"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Usuario</ion-label>
+          <ion-input type="text" value="{{data.usr}}" [(ngModel)]="usuario.usr"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Antigua Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="oldpass"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Nueva Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="usuario.pass"></ion-input>
+        </ion-item>
+        <br>
+				<ion-item *ngIf="photochanged == '0'">
+					<ion-header>
+						Imagen
+					</ion-header>
+					<img src="{{data.imagen}}" (click)="imagen()">
+				</ion-item>
+
+				<ion-item *ngIf="photochanged == '1'">
+					<ion-header>
+						Imagen
+					</ion-header>
+					<img src="{{finca.imagen}}" (click)="imagen()">
+				</ion-item>
+        <span *ngIf="oldpass != data.pass">
+          La contraseña es incorrecta
+        </span>
+
+      </ion-card-content>
+      <br>
+    </ion-card>
+    <div *ngIf="oldpass == data.pass">
+      <button ion-button class="center" color="add" (click)="save()">Guardar cambios</button>
+    </div>
+    
+
+
+  </ion-content>
+</div>

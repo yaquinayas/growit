@@ -33,6 +33,8 @@ export class EditReport {
       this.reporte.id_finca = value;
       console.log("id finca es " + this.reporte.id_finca)
     });
+    this.loadDetail();
+    
 
   }
 
@@ -40,7 +42,7 @@ export class EditReport {
     console.log('Hello EdditReport Page');
   }
 
-  loadDetail(id:string){
+  loadDetail(){
     this.client.getOne(this.idreporte).subscribe((res) => {
       this.data = res;         
 
@@ -53,6 +55,7 @@ export class EditReport {
       duration: 100000000000000
     });
     loader.present();
+    this.reporte.id = this.data.id;
     this.client.update(this.idreporte, this.reporte).subscribe(
       (res) => {
         loader.dismissAll();

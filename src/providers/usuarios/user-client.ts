@@ -28,6 +28,11 @@ export class UserClient {
     getOne(id: string): Observable<User> {
         return this.http.get(this.url + "/" + id).map(this.processArray).catch(this.processCatch);
     }
+
+    update(id: string, usuario: User) {
+    return this.http.put(this.url + "/" + id, usuario).map(this.process).catch(this.processCatch);
+  }
+
     private process(res: Response) {
         let body = res.json();
         return body.success;
