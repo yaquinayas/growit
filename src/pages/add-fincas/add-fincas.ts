@@ -69,6 +69,7 @@ export class AddFincasPage {
             text: 'Aceptar',
             handler: () => {
               this.events.publish("reloadHome");
+              this.events.publish("reloaduser");
               this.navCtrl.pop();
               console.log('OK');
             }
@@ -85,6 +86,7 @@ export class AddFincasPage {
             text: 'Aceptar',
             handler: () => {
               this.events.publish("reloadHome");
+              this.events.publish("reloaduser");
               this.navCtrl.pop();
               console.log('OK');
             }

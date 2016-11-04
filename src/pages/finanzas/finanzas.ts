@@ -54,7 +54,12 @@ export class FinanzasPage {
     this.client.getAllOfUsr(id).subscribe((res) => {
       loader.dismissAll();
       this.data = res;
-    });
+    },
+      (err) => {
+        loader.dismissAll();
+        
+
+      });
   }
 
   goToDetail(id: string) {

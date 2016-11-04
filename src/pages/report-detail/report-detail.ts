@@ -84,7 +84,12 @@ export class ReportDetailPage {
     loader.present();
     this.client.getAllOfUsr(id).subscribe((res) => { 
       loader.dismissAll();
-      this.data = res; });
+      this.data = res; },
+      (err) => {
+        loader.dismissAll();
+        
+
+      });
   }
 
 

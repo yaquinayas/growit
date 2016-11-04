@@ -82,7 +82,23 @@ export class EditAnimal {
 
       console.log("nac es " + nac3[0]);
 
-         });
+         },
+      (err) => {
+        loader.dismissAll();
+        let confirm = this.alertCtrl.create({
+          title: 'Error',
+          message: 'Hubo un problema al cargar los datos',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log('OK');
+              }
+            }
+          ]
+        });
+        confirm.present();
+      });
   }
 
   save() { 

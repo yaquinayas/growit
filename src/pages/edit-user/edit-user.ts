@@ -56,7 +56,23 @@ export class EditUser {
       (res) => { 
         loader.dismissAll();  
         this.data = res;
-       });
+       },
+      (err) => {
+        loader.dismissAll();
+        let confirm = this.alertCtrl.create({
+          title: 'Error',
+          message: 'Hubo un problema al cargar los datos',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log('OK');
+              }
+            }
+          ]
+        });
+        confirm.present();
+      });
   }
 
   save() {

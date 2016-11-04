@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Animal } from '../../providers/animales/animal';
 import { AnimalClient } from '../../providers/animales/animal-client';
 
@@ -23,7 +23,8 @@ export class AnimalDetailsPage {
   constructor(public navCtrl: NavController,
     private params: NavParams,
     private client: AnimalClient,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController) {
     this.data = new Animal;
     let ida = params.get('ida');
     this.loadDetails(ida);
@@ -48,12 +49,27 @@ export class AnimalDetailsPage {
       let nac = all.split('T');
       let nac2 = nac[0].split('"');
       let nac3 = nac2[1];
-      this.nac = nac3;
-      
+      this.nac = nac3;    
       
 
       //console.log(JSON.stringify(this.data));
-    });
+    },
+      (err) => {
+        loader.dismissAll();
+        let confirm = this.alertCtrl.create({
+          title: 'Error',
+          message: 'Hubo un problema al cargar los datos',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log('OK');
+              }
+            }
+          ]
+        });
+        confirm.present();
+      });
   }
 
 

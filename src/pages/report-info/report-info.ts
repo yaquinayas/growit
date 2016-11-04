@@ -51,7 +51,23 @@ export class ReportInfo {
       let nac2 = nac[0].split('"');
       let nac3 = nac2[1];
       this.fecha = nac3;
-    })
+    },
+      (err) => {
+        loader.dismissAll();
+        let confirm = this.alertCtrl.create({
+          title: 'Error',
+          message: 'Hubo un problema al cargar los datos',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log('OK');
+              }
+            }
+          ]
+        });
+        confirm.present();
+      });
   }
 
 }

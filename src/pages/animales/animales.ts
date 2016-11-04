@@ -64,7 +64,12 @@ export class AnimalsPage {
       loader.dismissAll();
       this.data = res;
 
-    });
+    },
+    (err) =>{
+      loader.dismissAll();
+      
+    }
+    );
   }
 
   goToAnimalDetails(id: string) {

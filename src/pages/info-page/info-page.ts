@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Storage } from '@ionic/Storage';
-import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Events, LoadingController, AlertController } from 'ionic-angular';
 
 import { FincaClient } from '../../providers/fincas/finca-client';
 import { Finca } from '../../providers/fincas/finca';
@@ -32,7 +32,8 @@ export class InfoPage {
     private store: Storage,
     private params: NavParams,
     private event: Events,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController) {
     this.data = new Finca;
     this.animal = [];
 
@@ -77,7 +78,10 @@ export class InfoPage {
     this.client.getOne(id).subscribe((res) => { 
       loader.dismissAll();
       this.data = res;
-     });
+     },
+      (err) => {
+        loader.dismissAll();
+             });
   }
 
   NumberOfAnimals(id: string) {

@@ -76,6 +76,7 @@ export class HomePage {
       },
       (err) => {
         loader.dismissAll();
+        
 
       }
     );
@@ -186,6 +187,7 @@ export class HomePage {
 
   ngOnDestroy() {
     this.events.unsubscribe("reloadHome");
+    this.menu.close();
   }
 
 

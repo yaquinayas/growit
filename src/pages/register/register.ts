@@ -62,7 +62,7 @@ export class RegisterPage {
           {
             text: 'Aceptar',
             handler: () => {                          
-              this.navCtrl.pop();
+              
               console.log('OK');
             }
           }
