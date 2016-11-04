@@ -18,10 +18,10 @@
 	<ion-content padding class="transparent">
 		<ion-list>
 			<ion-item>
-				<ion-label>Tipo</ion-label>
-				<ion-select [(ngModel)]="reporte.tipo">
-					<ion-option value="Ingreso">Ingreso</ion-option>
-					<ion-option value="Egreso">Egreso</ion-option>
+				<ion-label floating>Tipo</ion-label>
+				<ion-select [(ngModel)]="reporte.tipo" placeholder="{{data.tipo}}">
+					<ion-option value="Ingreso" selected="{{selectedI}}">Ingreso</ion-option>
+					<ion-option value="Egreso" selected="{{selectedE}}">Egreso</ion-option>
 				</ion-select>
 			</ion-item>
 
@@ -36,8 +36,8 @@
 			</ion-item>
 
 			<ion-item>
-				<ion-label>Fecha</ion-label>
-				<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="reporte.fecha"></ion-datetime>
+				<ion-label floating>Fecha:</ion-label>
+				<ion-datetime displayFormat="MM/DD/YYYY" cancelText="Cancelar" doneText="Listo" [(ngModel)]="data.fecha" [(ngModel)]="reporte.fecha"></ion-datetime>
 			</ion-item>
 		</ion-list>
 		<button ion-button class="center" color="add" (click)="save()">Agregar</button>

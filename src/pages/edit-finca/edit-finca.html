@@ -14,31 +14,35 @@
 	</ion-header>
 
 
-	<ion-content padding>
+	<ion-content padding class="transparent">
 
-		<ion-item>
-			<ion-label floating>Nombre:</ion-label>
-			<ion-input type="text" value="{{data.nombre}}" [(ngModel)]="finca.nombre"></ion-input>
-		</ion-item>
+		<ion-card>
+			<ion-card-content>
+				<ion-item>
+					<ion-label floating>Nombre:</ion-label>
+					<ion-input type="text" value="{{data.nombre}}" [(ngModel)]="finca.nombre"></ion-input>
+				</ion-item>
 
-		<ion-item>
-			<ion-label floating>Dirección:</ion-label>
-			<ion-input type="text" value="{{data.direccion}}" [(ngModel)]="finca.direccion"></ion-input>
-		</ion-item>
-		<br>
-		<ion-item *ngIf="photochanged == '0'">
-			<ion-header>
-				Imagen
-			</ion-header>
-			<img src="{{data.imagen}}" (click)="imagen()">
-		</ion-item>
+				<ion-item>
+					<ion-label floating>Dirección:</ion-label>
+					<ion-input type="text" value="{{data.direccion}}" [(ngModel)]="finca.direccion"></ion-input>
+				</ion-item>
+				<br>
+				<ion-item *ngIf="photochanged == '0'">
+					<ion-header>
+						Imagen
+					</ion-header>
+					<img src="{{data.imagen}}" (click)="imagen()">
+				</ion-item>
 
-		<ion-item *ngIf="photochanged == '1'">
-			<ion-header>
-				Imagen
-			</ion-header>
-			<img src="{{finca.imagen}}" (click)="imagen()">
-		</ion-item>
+				<ion-item *ngIf="photochanged == '1'">
+					<ion-header>
+						Imagen
+					</ion-header>
+					<img src="{{finca.imagen}}" (click)="imagen()">
+				</ion-item>
+			</ion-card-content>
+		</ion-card>
 
 		<button ion-button class="center" color="add" (click)="save()">
     <ion-icon name="ios-share-outline"></ion-icon>

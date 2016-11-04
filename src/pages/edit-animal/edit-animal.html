@@ -32,35 +32,35 @@
 				<br>
 
 				<ion-item>
-					<ion-label>Sexo:</ion-label>
-					<ion-select [(ngModel)]="animal.sexo" [(ngModel)]="data.sexo">
-						<ion-option value="Macho">Macho</ion-option>
-						<ion-option value="Hembra">Hembra</ion-option>
+					<ion-label floating>Sexo:</ion-label>
+					<ion-select [(ngModel)]="animal.sexo" [(ngModel)]="data.sexo"  placeholder="{{data.sexo}}">
+						<ion-option value="Macho" selected="{{selectedM}}">Macho</ion-option>
+						<ion-option value="Hembra" selected="{{selectedH}}">Hembra</ion-option>
 					</ion-select>
 				</ion-item>
 
 
 				<ion-item>
-					<ion-label>Fecha de nacimiento:</ion-label>
-					<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
+					<ion-label floating>Fecha de nacimiento:</ion-label>
+					<ion-datetime displayFormat="MM/DD/YYYY" color="add" cancelText="Cancelar" doneText="Listo" [(ngModel)]="data.nacimiento" [(ngModel)]="animal.nacimiento"></ion-datetime>
 				</ion-item>
 				<br>
 				<ion-item>
 					<ion-label floating>Peso al Nacer:</ion-label>
-					<ion-input type="number" [(ngModel)]="data.peso_al_nacer"></ion-input>
+					<ion-input type="number" value="{{data.peso_al_nacer}}" [(ngModel)]="animal.peso_al_nacer"></ion-input>
 				</ion-item>
 				<br>
 				<ion-item>
-					<ion-label>Tipo:</ion-label>
-					<ion-select [(ngModel)]="animal.tipo">
-						<ion-option value="Leche">Leche</ion-option>
-						<ion-option value="Carne">Carne</ion-option>
+					<ion-label floating>Tipo:</ion-label>
+					<ion-select [(ngModel)]="animal.tipo" placeholder="{{data.tipo}}">
+						<ion-option value="Leche" selected="{{selectedL}}">Leche</ion-option>
+						<ion-option value="Carne" selected="{{selectedC}}">Carne</ion-option>
 					</ion-select>
 				</ion-item>
 
 				<ion-item *ngIf="data.sexo == 'Hembra'">
 					<ion-label floating>Litros diarios:</ion-label>
-					<ion-input type="number" value="data.litros_diarios" [(ngModel)]="animal.litros_diarios"></ion-input>
+					<ion-input type="number" value="{{data.litros_diarios}}" [(ngModel)]="animal.litros_diarios"></ion-input>
 				</ion-item>
 
 				<ion-item>

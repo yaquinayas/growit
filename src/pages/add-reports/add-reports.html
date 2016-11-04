@@ -37,7 +37,7 @@
 
 			<ion-item>
 				<ion-label>Fecha</ion-label>
-				<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="reporte.fecha"></ion-datetime>
+				<ion-datetime displayFormat="MM/DD/YYYY" cancelText="Cancelar" doneText="Listo" [(ngModel)]="reporte.fecha"></ion-datetime>
 			</ion-item>
 		</ion-list>
 		<button ion-button class="center" color="add" (click)="save()">Agregar</button>

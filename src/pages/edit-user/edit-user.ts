@@ -22,6 +22,7 @@ export class EditUser {
   id: string;
   photochanged: number;
   
+  
 
   constructor(public navCtrl: NavController,
     private events: Events,

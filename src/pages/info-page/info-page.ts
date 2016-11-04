@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Storage } from '@ionic/Storage';
 import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
 
@@ -107,6 +107,10 @@ export class InfoPage {
       }
     });
 
+  }
+
+  ngOnDestroy() {
+    this.event.unsubscribe("reloadAnimals");
   }
 
 }

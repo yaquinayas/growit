@@ -46,12 +46,17 @@ export class AddAnimalPage {
       delete this.animal.litros_diarios;
       this.animal.litros_diarios = "No aplica";
     }
-    let nac = this.animal.nacimiento.toString();
-    let date1 = new Date(nac);
-    //let date2 = new Date("12/15/2010");
-    let timeDiff = Math.abs(Date.now() - date1.getTime());
-    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    this.animal.ganancia = (this.animal.peso - this.animal.peso_al_nacer) / diffDays;
+    if (this.animal.nacimiento) {
+      let nac = this.animal.nacimiento.toString();
+      let date1 = new Date(nac);
+      //let date2 = new Date("12/15/2010");
+      let timeDiff = Math.abs(Date.now() - date1.getTime());
+      let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      this.animal.ganancia = (this.animal.peso - this.animal.peso_al_nacer) / diffDays;
+    }else{
+      this.animal.ganancia = 0;
+    }
+
 
     let loader = this.loadingCtrl.create({
       content: "Cargando",

@@ -31,7 +31,7 @@
 				<br>
 
 				<ion-item>
-					<ion-label>Sexo:</ion-label>
+					<ion-label floating>Sexo:</ion-label>
 					<ion-select [(ngModel)]="animal.sexo">
 						<ion-option value="Macho">Macho</ion-option>
 						<ion-option value="Hembra">Hembra</ion-option>
@@ -40,8 +40,8 @@
 
 
 				<ion-item>
-					<ion-label>Fecha de nacimiento:</ion-label>
-					<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="animal.nacimiento"></ion-datetime>
+					<ion-label floating>Fecha de nacimiento:</ion-label>
+					<ion-datetime displayFormat="MM/DD/YYYY" cancelText="Cancelar" doneText="Listo" [(ngModel)]="animal.nacimiento"></ion-datetime>
 				</ion-item>
 				
 				<ion-item>
@@ -49,7 +49,7 @@
 					<ion-input type="number" [(ngModel)]="animal.peso_al_nacer"></ion-input>
 				</ion-item>
 				<ion-item>
-					<ion-label>Tipo:</ion-label>
+					<ion-label floating>Tipo:</ion-label>
 					<ion-select [(ngModel)]="animal.tipo">
 						<ion-option value="Leche">Leche</ion-option>
 						<ion-option value="Carne">Carne</ion-option>

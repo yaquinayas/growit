@@ -19,6 +19,8 @@ export class EditReport {
   reporte: Reporte;
   data: Reporte;
   idreporte: string;
+  selectedE: string;
+  selectedI: string;
   constructor(public navCtrl: NavController,
     private client: ReportClient,
     private store: Storage,
@@ -43,8 +45,22 @@ export class EditReport {
   }
 
   loadDetail(){
+    let loader = this.loadingCtrl.create({
+      content: "Cargando",
+      duration: 100000000000000
+    });
+    loader.present();
     this.client.getOne(this.idreporte).subscribe((res) => {
-      this.data = res;         
+      loader.dismissAll();
+      this.data = res;
+      if(this.data.tipo == 'Ingreso'){
+        this.selectedI = 'true';
+        this.selectedE = 'false';
+      }else{
+        this.selectedI = 'true';
+        this.selectedE = 'false';
+      }
+
 
     });
   }

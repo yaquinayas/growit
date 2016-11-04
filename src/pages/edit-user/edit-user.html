@@ -7,7 +7,7 @@
 <div class="background">
   <ion-header>
 
-    <ion-navbar>
+    <ion-navbar color="bar">
       <ion-title>Editar Perfil</ion-title>
     </ion-navbar>
   </ion-header>
@@ -16,40 +16,46 @@
     <ion-card>
       <ion-card-content>
         <ion-item>
-          <ion-label floating>Nombre</ion-label>
+          <ion-label floating>Nombre:</ion-label>
           <ion-input type="text" value="{{data.nombre}}" [(ngModel)]="usuario.nombre"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Cedula</ion-label>
+          <ion-label floating>Cedula:</ion-label>
           <ion-input type="text" value="{{data.cedula}}" [(ngModel)]="usuario.cedula"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Usuario</ion-label>
+          <ion-label floating>Usuario:</ion-label>
           <ion-input type="text" value="{{data.usr}}" [(ngModel)]="usuario.usr"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Antigua Contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="oldpass"></ion-input>
+          <ion-label floating>Contraseña:</ion-label>
+          <ion-input type="password"  [(ngModel)]="oldpass"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label floating>Nueva Contraseña</ion-label>
+          <ion-label>Cambiar Contraseña</ion-label>
+          <ion-checkbox color="add" [ngModel]="changepass" ng-value="1"></ion-checkbox>
+        </ion-item>
+
+        <ion-item *ngIf="changepass == '1'">
+          <ion-label floating>Nueva Contraseña:</ion-label>
           <ion-input type="password" [(ngModel)]="usuario.pass"></ion-input>
         </ion-item>
         <br>
-				<ion-item *ngIf="photochanged == '0'">
-					<ion-header>
-						Imagen
-					</ion-header>
-					<img src="{{data.imagen}}" (click)="imagen()">
-				</ion-item>
+        <ion-item *ngIf="photochanged == '0'">
+          <ion-header>
+            Imagen
+          </ion-header>
+          <img src="{{data.imagen}}" (click)="imagen()">
+        </ion-item>
 
-				<ion-item *ngIf="photochanged == '1'">
-					<ion-header>
-						Imagen
-					</ion-header>
-					<img src="{{finca.imagen}}" (click)="imagen()">
-				</ion-item>
+        <ion-item *ngIf="photochanged == '1'">
+          <ion-header>
+            Imagen
+          </ion-header>
+          <img src="{{usuario.imagen}}" (click)="imagen()">
+        </ion-item>
         <span *ngIf="oldpass != data.pass">
           La contraseña es incorrecta
         </span>
@@ -60,7 +66,7 @@
     <div *ngIf="oldpass == data.pass">
       <button ion-button class="center" color="add" (click)="save()">Guardar cambios</button>
     </div>
-    
+
 
 
   </ion-content>

@@ -22,6 +22,11 @@ export class EditAnimal {
   nac: string;
   photochanged: number;
   ida: string;
+  selectedM: string;
+  selectedH: string;
+  selectedC: string;
+  selectedL: string;
+
   constructor(public navCtrl: NavController,
     private client: AnimalClient,
     private events: Events,
@@ -54,6 +59,20 @@ export class EditAnimal {
     this.client.getOne(id).subscribe((res) => {
       loader.dismissAll();
       this.data = res;
+      if(this.data.sexo == 'Macho'){
+        this.selectedM = 'true';
+        this.selectedH = 'false';
+      }else{
+        this.selectedH = 'true';
+        this.selectedM = 'false';
+      }
+      if(this.data.tipo == 'Leche'){
+        this.selectedL = 'true';
+        this.selectedC = 'false';
+      }else{
+        this.selectedC = 'true';
+        this.selectedL = 'false';
+      }
       let all = JSON.stringify(this.data);
       let nac = all.split(',');
       let nac2 = nac[4].split(':"');
@@ -63,9 +82,7 @@ export class EditAnimal {
 
       console.log("nac es " + nac3[0]);
 
-
-      console.log(JSON.stringify(this.data));
-    });
+         });
   }
 
   save() { 
@@ -78,6 +95,36 @@ export class EditAnimal {
       delete this.animal.litros_diarios;
       this.animal.litros_diarios = "No aplica";
     }
+    let changed: boolean = false;
+    let pesonac: number;
+    if(this.animal.peso_al_nacer){
+      pesonac = this.animal.peso_al_nacer;
+      changed = true;
+    }else{
+      pesonac = this.data.peso_al_nacer;
+    }
+    let peso: number;
+    if(this.animal.peso){
+      peso = this.animal.peso;
+      changed = true;
+    }else{
+      peso = this.data.peso;
+    }
+    let nac: string;
+    if(this.animal.nacimiento){
+      nac = this.animal.nacimiento.toString();
+      changed = true;
+    }else{
+      nac = this.data.nacimiento.toString();
+    }
+
+     if(changed){
+       let date1 = new Date(nac);
+    //let date2 = new Date("12/15/2010");
+    let timeDiff = Math.abs(Date.now() - date1.getTime());
+    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    this.animal.ganancia = (peso - pesonac) / diffDays;
+     }
        
     this.client.update(this.ida,this.animal).subscribe(
       (res) => {
@@ -103,6 +150,7 @@ export class EditAnimal {
             text: 'Aceptar',
             handler: () => {
               this.events.publish("reloadAnimals");
+              this.events.publish("reloadInfo");
               this.navCtrl.pop();
               console.log('OK');
             }
@@ -119,6 +167,7 @@ export class EditAnimal {
             text: 'Aceptar',
             handler: () => {
               this.events.publish("reloadAnimals");
+              this.events.publish("reloadInfo");
               this.navCtrl.pop();
               console.log('OK');
             }
