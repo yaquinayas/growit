@@ -4,10 +4,10 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<div class="background">
+<div class="login-background">
 	<ion-header>
 
-		<ion-navbar color="bar">
+		<ion-navbar color="dark">
 			<ion-title>Registro de usuario</ion-title>
 		</ion-navbar>
 
@@ -37,21 +37,21 @@
 			</ion-item>
 			</ion-card-content>
 			<br>
-			<ion-item *ngIf="finca.imagen == '' ">
+			<ion-item *ngIf="usuario.imagen == '' ">
 					<button ion-button large class="center" outline (click)="imagen()"> <ion-icon name="images"></ion-icon>
 						&nbsp;Imagen
 					</button>
 				</ion-item>
 
-				<ion-item *ngIf="finca.imagen != ''">
+				<ion-item *ngIf="usuario.imagen != ''">
 					<ion-header>
 						Imagen
 					</ion-header>
-					<img src="{{finca.imagen}}" (click)="imagen()">
+					<img src="{{usuario.imagen}}" (click)="imagen()">
 				</ion-item>
 		</ion-card>
 
-		<button ion-button class="center" color="add" (click)="save()">Agregar</button>
+		<button ion-button class="center"  (click)="save()">Agregar</button>
 
 	</ion-content>
 </div>

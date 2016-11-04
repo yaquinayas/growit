@@ -23,6 +23,7 @@ export class RegisterPage {
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController) {
     this.usuario = new User();
+    this.usuario.imagen = '';
   }
 
   ionViewDidLoad() {

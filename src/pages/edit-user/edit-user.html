@@ -35,7 +35,7 @@
 
         <ion-item>
           <ion-label>Cambiar Contraseña</ion-label>
-          <ion-checkbox color="add" [ngModel]="changepass" ng-value="1"></ion-checkbox>
+          <ion-checkbox color="add" [(ngModel)]="changepass" ng-value="1"></ion-checkbox>
         </ion-item>
 
         <ion-item *ngIf="changepass == '1'">

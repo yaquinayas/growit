@@ -1,35 +1,35 @@
 <div class="home-background">
-<ion-header>
-	<ion-navbar color="bar">
-		<ion-title>
-			Fincas
-		</ion-title>
-		<button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
-	</ion-navbar>
-</ion-header>
-<ion-menu [content]="content">
 	<ion-header>
-		<ion-toolbar color="bar">
-			<ion-title>Herramientas</ion-title>
-		</ion-toolbar>
+		<ion-navbar color="bar">
+			<ion-title>
+				Fincas
+			</ion-title>
+			<button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+		</ion-navbar>
 	</ion-header>
-	<ion-content>
-		<ion-list>
-			<button ion-item (click)="goToProfile()">
+	<ion-menu [content]="content">
+		<ion-header>
+			<ion-toolbar color="bar">
+				<ion-title>Herramientas</ion-title>
+			</ion-toolbar>
+		</ion-header>
+		<ion-content class="menu-background">
+			<ion-list class="transparent">
+				<button ion-item (click)="goToProfile()" class="transparent white-text"><ion-icon name="contact"></ion-icon>
         Ver Perfil
       </button>
-			<button ion-item (click)="CloseSession()">
+				<button ion-item (click)="CloseSession()" class="transparent white-text"> <ion-icon name="exit"></ion-icon>
         Cerrar Sesión
       </button>
-		</ion-list>
-	</ion-content>
-</ion-menu>
+			</ion-list>
+		</ion-content>
+	</ion-menu>
 
-<ion-nav id="nav" #content></ion-nav>
+	<ion-nav id="nav" #content></ion-nav>
 
 	<ion-content padding class="transparent">
 
-		
+
 		<ion-card *ngFor="let u of data" class="background-card" (swipe)="confirmation(id = u.idfinca)">
 
 			<ion-card-content>
@@ -41,8 +41,7 @@
 							<img class="img-finca" src="{{u.imagen}}">
 						</ion-col>
 						<ion-col width-50 (click)="goToFincaDetails(id = u.idfinca )">
-							<span class="white-text">{{u.nombre}}.</span> <br>  
-						 {{u.direccion}}
+							<span class="white-text">{{u.nombre}}.</span> <br> {{u.direccion}}
 						</ion-col>
 						<ion-col>
 							<ion-icon name="close-circle" color="danger" (click)="confirmation(id = u.idfinca)"></ion-icon>
@@ -60,7 +59,7 @@
 
 		</ion-card>
 
-	
+
 
 
 
